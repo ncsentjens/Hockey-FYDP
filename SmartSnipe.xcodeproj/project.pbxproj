@@ -1,0 +1,500 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		01ACB31C23736918003ACBF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ACB31B23736918003ACBF4 /* AppDelegate.swift */; };
+		01ACB32023736918003ACBF4 /* NetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ACB31F23736918003ACBF4 /* NetViewController.swift */; };
+		01ACB32323736918003ACBF4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01ACB32123736918003ACBF4 /* Main.storyboard */; };
+		01ACB3252373691C003ACBF4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01ACB3242373691C003ACBF4 /* Assets.xcassets */; };
+		01ACB3282373691C003ACBF4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01ACB3262373691C003ACBF4 /* LaunchScreen.storyboard */; };
+		01ACB3332373691D003ACBF4 /* SmartSnipeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ACB3322373691D003ACBF4 /* SmartSnipeTests.swift */; };
+		01ACB341237369F6003ACBF4 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ACB340237369F6003ACBF4 /* StatsViewController.swift */; };
+		01ACB34323736A02003ACBF4 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ACB34223736A02003ACBF4 /* SettingsViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		01ACB32F2373691D003ACBF4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 01ACB31023736918003ACBF4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 01ACB31723736918003ACBF4;
+			remoteInfo = SmartSnipe;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		01ACB31823736918003ACBF4 /* SmartSnipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartSnipe.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		01ACB31B23736918003ACBF4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		01ACB31F23736918003ACBF4 /* NetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetViewController.swift; sourceTree = "<group>"; };
+		01ACB32223736918003ACBF4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		01ACB3242373691C003ACBF4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		01ACB3272373691C003ACBF4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		01ACB3292373691C003ACBF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		01ACB32E2373691D003ACBF4 /* SmartSnipeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmartSnipeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		01ACB3322373691D003ACBF4 /* SmartSnipeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartSnipeTests.swift; sourceTree = "<group>"; };
+		01ACB3342373691D003ACBF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		01ACB340237369F6003ACBF4 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
+		01ACB34223736A02003ACBF4 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		01ACB31523736918003ACBF4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01ACB32B2373691D003ACBF4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		01ACB30F23736918003ACBF4 = {
+			isa = PBXGroup;
+			children = (
+				01ACB31A23736918003ACBF4 /* SmartSnipe */,
+				01ACB3312373691D003ACBF4 /* SmartSnipeTests */,
+				01ACB31923736918003ACBF4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		01ACB31923736918003ACBF4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				01ACB31823736918003ACBF4 /* SmartSnipe.app */,
+				01ACB32E2373691D003ACBF4 /* SmartSnipeTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		01ACB31A23736918003ACBF4 /* SmartSnipe */ = {
+			isa = PBXGroup;
+			children = (
+				01ACB33F237369B6003ACBF4 /* Managers */,
+				01ACB33E237369AC003ACBF4 /* Views */,
+				01ACB33D2373699B003ACBF4 /* View Controllers */,
+				01ACB31B23736918003ACBF4 /* AppDelegate.swift */,
+				01ACB32123736918003ACBF4 /* Main.storyboard */,
+				01ACB3242373691C003ACBF4 /* Assets.xcassets */,
+				01ACB3262373691C003ACBF4 /* LaunchScreen.storyboard */,
+				01ACB3292373691C003ACBF4 /* Info.plist */,
+			);
+			path = SmartSnipe;
+			sourceTree = "<group>";
+		};
+		01ACB3312373691D003ACBF4 /* SmartSnipeTests */ = {
+			isa = PBXGroup;
+			children = (
+				01ACB3322373691D003ACBF4 /* SmartSnipeTests.swift */,
+				01ACB3342373691D003ACBF4 /* Info.plist */,
+			);
+			path = SmartSnipeTests;
+			sourceTree = "<group>";
+		};
+		01ACB33D2373699B003ACBF4 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				01ACB31F23736918003ACBF4 /* NetViewController.swift */,
+				01ACB340237369F6003ACBF4 /* StatsViewController.swift */,
+				01ACB34223736A02003ACBF4 /* SettingsViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		01ACB33E237369AC003ACBF4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		01ACB33F237369B6003ACBF4 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		01ACB31723736918003ACBF4 /* SmartSnipe */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 01ACB3372373691D003ACBF4 /* Build configuration list for PBXNativeTarget "SmartSnipe" */;
+			buildPhases = (
+				01ACB31423736918003ACBF4 /* Sources */,
+				01ACB31523736918003ACBF4 /* Frameworks */,
+				01ACB31623736918003ACBF4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SmartSnipe;
+			productName = SmartSnipe;
+			productReference = 01ACB31823736918003ACBF4 /* SmartSnipe.app */;
+			productType = "com.apple.product-type.application";
+		};
+		01ACB32D2373691D003ACBF4 /* SmartSnipeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 01ACB33A2373691D003ACBF4 /* Build configuration list for PBXNativeTarget "SmartSnipeTests" */;
+			buildPhases = (
+				01ACB32A2373691D003ACBF4 /* Sources */,
+				01ACB32B2373691D003ACBF4 /* Frameworks */,
+				01ACB32C2373691D003ACBF4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				01ACB3302373691D003ACBF4 /* PBXTargetDependency */,
+			);
+			name = SmartSnipeTests;
+			productName = SmartSnipeTests;
+			productReference = 01ACB32E2373691D003ACBF4 /* SmartSnipeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		01ACB31023736918003ACBF4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1120;
+				LastUpgradeCheck = 1120;
+				ORGANIZATIONNAME = NickSentjens;
+				TargetAttributes = {
+					01ACB31723736918003ACBF4 = {
+						CreatedOnToolsVersion = 11.2;
+					};
+					01ACB32D2373691D003ACBF4 = {
+						CreatedOnToolsVersion = 11.2;
+						TestTargetID = 01ACB31723736918003ACBF4;
+					};
+				};
+			};
+			buildConfigurationList = 01ACB31323736918003ACBF4 /* Build configuration list for PBXProject "SmartSnipe" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 01ACB30F23736918003ACBF4;
+			productRefGroup = 01ACB31923736918003ACBF4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				01ACB31723736918003ACBF4 /* SmartSnipe */,
+				01ACB32D2373691D003ACBF4 /* SmartSnipeTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		01ACB31623736918003ACBF4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01ACB3282373691C003ACBF4 /* LaunchScreen.storyboard in Resources */,
+				01ACB3252373691C003ACBF4 /* Assets.xcassets in Resources */,
+				01ACB32323736918003ACBF4 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01ACB32C2373691D003ACBF4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		01ACB31423736918003ACBF4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01ACB32023736918003ACBF4 /* NetViewController.swift in Sources */,
+				01ACB31C23736918003ACBF4 /* AppDelegate.swift in Sources */,
+				01ACB341237369F6003ACBF4 /* StatsViewController.swift in Sources */,
+				01ACB34323736A02003ACBF4 /* SettingsViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01ACB32A2373691D003ACBF4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01ACB3332373691D003ACBF4 /* SmartSnipeTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		01ACB3302373691D003ACBF4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 01ACB31723736918003ACBF4 /* SmartSnipe */;
+			targetProxy = 01ACB32F2373691D003ACBF4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		01ACB32123736918003ACBF4 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01ACB32223736918003ACBF4 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		01ACB3262373691C003ACBF4 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01ACB3272373691C003ACBF4 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		01ACB3352373691D003ACBF4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		01ACB3362373691D003ACBF4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		01ACB3382373691D003ACBF4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = SmartSnipe/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nicksentjens.SmartSnipe;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		01ACB3392373691D003ACBF4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = SmartSnipe/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nicksentjens.SmartSnipe;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		01ACB33B2373691D003ACBF4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = SmartSnipeTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nicksentjens.SmartSnipeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SmartSnipe.app/SmartSnipe";
+			};
+			name = Debug;
+		};
+		01ACB33C2373691D003ACBF4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = SmartSnipeTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nicksentjens.SmartSnipeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SmartSnipe.app/SmartSnipe";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		01ACB31323736918003ACBF4 /* Build configuration list for PBXProject "SmartSnipe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01ACB3352373691D003ACBF4 /* Debug */,
+				01ACB3362373691D003ACBF4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		01ACB3372373691D003ACBF4 /* Build configuration list for PBXNativeTarget "SmartSnipe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01ACB3382373691D003ACBF4 /* Debug */,
+				01ACB3392373691D003ACBF4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		01ACB33A2373691D003ACBF4 /* Build configuration list for PBXNativeTarget "SmartSnipeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01ACB33B2373691D003ACBF4 /* Debug */,
+				01ACB33C2373691D003ACBF4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 01ACB31023736918003ACBF4 /* Project object */;
+}
