@@ -16,26 +16,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let netViewController = NetViewController()
-        netViewController.tabBarItem = UITabBarItem(title: "Net",
-                                                    image: nil,
-                                                    selectedImage: nil)
+        let sessionViewController = SessionViewController()
+        sessionViewController.tabBarItem = UITabBarItem(title: "Session",
+                                                    image: UIImage(named: "unselected_hockey"),
+                                                    selectedImage: UIImage(named: "selected_hockey"))
         
         let statsViewController = StatsViewController()
         statsViewController.tabBarItem = UITabBarItem(title: "Stats",
-                                                      image: nil,
-                                                      selectedImage: nil)
+                                                      image: UIImage(named: "unselected_stats"),
+                                                      selectedImage: UIImage(named: "selected_stats"))
         
         let settingsViewController = SettingsViewController()
         settingsViewController.tabBarItem = UITabBarItem(title: "Settings",
-                                                         image: nil,
-                                                         selectedImage: nil)
+                                                         image: UIImage(named: "unselected_settings"),
+                                                         selectedImage: UIImage(named: "selected_settings"))
         
         let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [netViewController, statsViewController, settingsViewController]
+        tabBarController.viewControllers =
+            [UINavigationController(rootViewController:sessionViewController),
+             UINavigationController(rootViewController: statsViewController),
+             UINavigationController(rootViewController: settingsViewController)]
         
-        tabBarController.selectedViewController = netViewController
         tabBarController.selectedIndex = 0
+        tabBarController.tabBar.barTintColor = .black
+        tabBarController.tabBar.tintColor = .yellow
+        tabBarController.tabBar.unselectedItemTintColor = .gray
         
         self.window?.rootViewController = tabBarController
         
@@ -43,4 +48,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 }
+
 

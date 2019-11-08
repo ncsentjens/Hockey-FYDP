@@ -11,6 +11,10 @@ import UIKit
 class SettingsViewController: UIViewController {
 
     override func viewDidLoad() {
+        self.view.backgroundColor = .black
+        self.navigationController?.navigationBar.barTintColor = .black
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.gray]
+        self.navigationItem.title = "Settings"
         super.viewDidLoad()
     }
 
