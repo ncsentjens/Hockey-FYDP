@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		01ACB31C23736918003ACBF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ACB31B23736918003ACBF4 /* AppDelegate.swift */; };
-		01ACB32023736918003ACBF4 /* NetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ACB31F23736918003ACBF4 /* NetViewController.swift */; };
+		01ACB32023736918003ACBF4 /* SessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ACB31F23736918003ACBF4 /* SessionViewController.swift */; };
 		01ACB32323736918003ACBF4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01ACB32123736918003ACBF4 /* Main.storyboard */; };
 		01ACB3252373691C003ACBF4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01ACB3242373691C003ACBF4 /* Assets.xcassets */; };
 		01ACB3282373691C003ACBF4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01ACB3262373691C003ACBF4 /* LaunchScreen.storyboard */; };
@@ -30,7 +30,7 @@
 /* Begin PBXFileReference section */
 		01ACB31823736918003ACBF4 /* SmartSnipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartSnipe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01ACB31B23736918003ACBF4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		01ACB31F23736918003ACBF4 /* NetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetViewController.swift; sourceTree = "<group>"; };
+		01ACB31F23736918003ACBF4 /* SessionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionViewController.swift; sourceTree = "<group>"; };
 		01ACB32223736918003ACBF4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		01ACB3242373691C003ACBF4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01ACB3272373691C003ACBF4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -83,7 +83,7 @@
 			children = (
 				01ACB33F237369B6003ACBF4 /* Managers */,
 				01ACB33E237369AC003ACBF4 /* Views */,
-				01ACB33D2373699B003ACBF4 /* View Controllers */,
+				01ACB33D2373699B003ACBF4 /* ViewControllers */,
 				01ACB31B23736918003ACBF4 /* AppDelegate.swift */,
 				01ACB32123736918003ACBF4 /* Main.storyboard */,
 				01ACB3242373691C003ACBF4 /* Assets.xcassets */,
@@ -102,14 +102,14 @@
 			path = SmartSnipeTests;
 			sourceTree = "<group>";
 		};
-		01ACB33D2373699B003ACBF4 /* View Controllers */ = {
+		01ACB33D2373699B003ACBF4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				01ACB31F23736918003ACBF4 /* NetViewController.swift */,
+				01ACB31F23736918003ACBF4 /* SessionViewController.swift */,
 				01ACB340237369F6003ACBF4 /* StatsViewController.swift */,
 				01ACB34223736A02003ACBF4 /* SettingsViewController.swift */,
 			);
-			path = "View Controllers";
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		01ACB33E237369AC003ACBF4 /* Views */ = {
@@ -227,7 +227,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01ACB32023736918003ACBF4 /* NetViewController.swift in Sources */,
+				01ACB32023736918003ACBF4 /* SessionViewController.swift in Sources */,
 				01ACB31C23736918003ACBF4 /* AppDelegate.swift in Sources */,
 				01ACB341237369F6003ACBF4 /* StatsViewController.swift in Sources */,
 				01ACB34323736A02003ACBF4 /* SettingsViewController.swift in Sources */,
