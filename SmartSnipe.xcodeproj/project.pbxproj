@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0176B35D2378790E000562B3 /* SessionStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0176B35C2378790E000562B3 /* SessionStatusCell.swift */; };
+		0176B35F2378FC5E000562B3 /* HockeyNetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0176B35E2378FC5E000562B3 /* HockeyNetCell.swift */; };
 		01ACB31C23736918003ACBF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ACB31B23736918003ACBF4 /* AppDelegate.swift */; };
 		01ACB32023736918003ACBF4 /* SessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ACB31F23736918003ACBF4 /* SessionViewController.swift */; };
 		01ACB32323736918003ACBF4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01ACB32123736918003ACBF4 /* Main.storyboard */; };
@@ -15,6 +17,7 @@
 		01ACB3332373691D003ACBF4 /* SmartSnipeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ACB3322373691D003ACBF4 /* SmartSnipeTests.swift */; };
 		01ACB341237369F6003ACBF4 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ACB340237369F6003ACBF4 /* StatsViewController.swift */; };
 		01ACB34323736A02003ACBF4 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ACB34223736A02003ACBF4 /* SettingsViewController.swift */; };
+		01B516E6237B59A700A4F66D /* CurrentSessionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B516E5237B59A700A4F66D /* CurrentSessionCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,6 +31,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0176B35C2378790E000562B3 /* SessionStatusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStatusCell.swift; sourceTree = "<group>"; };
+		0176B35E2378FC5E000562B3 /* HockeyNetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HockeyNetCell.swift; sourceTree = "<group>"; };
 		01ACB31823736918003ACBF4 /* SmartSnipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartSnipe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01ACB31B23736918003ACBF4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		01ACB31F23736918003ACBF4 /* SessionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionViewController.swift; sourceTree = "<group>"; };
@@ -40,6 +45,7 @@
 		01ACB3342373691D003ACBF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01ACB340237369F6003ACBF4 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		01ACB34223736A02003ACBF4 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		01B516E5237B59A700A4F66D /* CurrentSessionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentSessionCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +121,9 @@
 		01ACB33E237369AC003ACBF4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0176B35C2378790E000562B3 /* SessionStatusCell.swift */,
+				0176B35E2378FC5E000562B3 /* HockeyNetCell.swift */,
+				01B516E5237B59A700A4F66D /* CurrentSessionCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -227,10 +236,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0176B35F2378FC5E000562B3 /* HockeyNetCell.swift in Sources */,
+				0176B35D2378790E000562B3 /* SessionStatusCell.swift in Sources */,
 				01ACB32023736918003ACBF4 /* SessionViewController.swift in Sources */,
 				01ACB31C23736918003ACBF4 /* AppDelegate.swift in Sources */,
 				01ACB341237369F6003ACBF4 /* StatsViewController.swift in Sources */,
 				01ACB34323736A02003ACBF4 /* SettingsViewController.swift in Sources */,
+				01B516E6237B59A700A4F66D /* CurrentSessionCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,6 +403,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = E662XLJ6QJ;
 				INFOPLIST_FILE = SmartSnipe/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -409,6 +422,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = E662XLJ6QJ;
 				INFOPLIST_FILE = SmartSnipe/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
