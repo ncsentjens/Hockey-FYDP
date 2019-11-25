@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0169C40A238C426600EEBAB5 /* SSColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169C409238C426600EEBAB5 /* SSColors.swift */; };
+		0169C40C238C70C200EEBAB5 /* LeftRightLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169C40B238C70C200EEBAB5 /* LeftRightLabel.swift */; };
+		0169C40E238C758600EEBAB5 /* SeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169C40D238C758600EEBAB5 /* SeparatorView.swift */; };
 		0176B35D2378790E000562B3 /* SessionStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0176B35C2378790E000562B3 /* SessionStatusCell.swift */; };
 		0176B35F2378FC5E000562B3 /* HockeyNetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0176B35E2378FC5E000562B3 /* HockeyNetCell.swift */; };
 		01ACB31C23736918003ACBF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ACB31B23736918003ACBF4 /* AppDelegate.swift */; };
@@ -31,6 +34,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0169C409238C426600EEBAB5 /* SSColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSColors.swift; sourceTree = "<group>"; };
+		0169C40B238C70C200EEBAB5 /* LeftRightLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftRightLabel.swift; sourceTree = "<group>"; };
+		0169C40D238C758600EEBAB5 /* SeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorView.swift; sourceTree = "<group>"; };
 		0176B35C2378790E000562B3 /* SessionStatusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStatusCell.swift; sourceTree = "<group>"; };
 		0176B35E2378FC5E000562B3 /* HockeyNetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HockeyNetCell.swift; sourceTree = "<group>"; };
 		01ACB31823736918003ACBF4 /* SmartSnipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartSnipe.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,6 +101,7 @@
 				01ACB3242373691C003ACBF4 /* Assets.xcassets */,
 				01ACB3262373691C003ACBF4 /* LaunchScreen.storyboard */,
 				01ACB3292373691C003ACBF4 /* Info.plist */,
+				0169C409238C426600EEBAB5 /* SSColors.swift */,
 			);
 			path = SmartSnipe;
 			sourceTree = "<group>";
@@ -124,6 +131,8 @@
 				0176B35C2378790E000562B3 /* SessionStatusCell.swift */,
 				0176B35E2378FC5E000562B3 /* HockeyNetCell.swift */,
 				01B516E5237B59A700A4F66D /* CurrentSessionCell.swift */,
+				0169C40B238C70C200EEBAB5 /* LeftRightLabel.swift */,
+				0169C40D238C758600EEBAB5 /* SeparatorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -237,11 +246,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				0176B35F2378FC5E000562B3 /* HockeyNetCell.swift in Sources */,
+				0169C40A238C426600EEBAB5 /* SSColors.swift in Sources */,
+				0169C40E238C758600EEBAB5 /* SeparatorView.swift in Sources */,
 				0176B35D2378790E000562B3 /* SessionStatusCell.swift in Sources */,
 				01ACB32023736918003ACBF4 /* SessionViewController.swift in Sources */,
 				01ACB31C23736918003ACBF4 /* AppDelegate.swift in Sources */,
 				01ACB341237369F6003ACBF4 /* StatsViewController.swift in Sources */,
 				01ACB34323736A02003ACBF4 /* SettingsViewController.swift in Sources */,
+				0169C40C238C70C200EEBAB5 /* LeftRightLabel.swift in Sources */,
 				01B516E6237B59A700A4F66D /* CurrentSessionCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

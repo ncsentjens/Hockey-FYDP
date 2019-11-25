@@ -8,17 +8,26 @@
 
 import UIKit
 
+enum HockeyNetHole {
+    case topLeft
+    case topRight
+    case bottomLeft
+    case bottomRight
+    case fiveHole
+}
+
 class HockeyNetCell: UITableViewCell {
-    let hockeyNet = UIView()
-    let topLeftHole = UIView()
-    let topRightHole = UIView()
-    let bottomLeftHole = UIView()
-    let bottomRightHole = UIView()
-    let fiveHole = UIView()
-    let descriptionLabel = UILabel()
-    let smartSnipeLabel = UILabel()
+    private let hockeyNet = UIView()
+    private let topLeftHole = UIView()
+    private let topRightHole = UIView()
+    private let bottomLeftHole = UIView()
+    private let bottomRightHole = UIView()
+    private let fiveHole = UIView()
+    private let descriptionLabel = UILabel()
+    private let smartSnipeLabel = UILabel()
     
-    private let sizeOfHole: CGFloat = 40
+    private let sizeOfHole: CGFloat = 50
+    private let sizeOfFiveHole: CGFloat = 35
     private let offsetFromPost: CGFloat = 24.0
     private let fiveHoleOffsetFromBottom: CGFloat = 24.0
     private let offsetFromBottom: CGFloat = 40.0
@@ -27,11 +36,17 @@ class HockeyNetCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.contentView.backgroundColor = .black
+        
+        self.contentView.backgroundColor = SSColors.raisinBlack
+        
         self.smartSnipeLabel.text = "SmartSnipe"
-        self.smartSnipeLabel.textColor = .white
-        self.descriptionLabel.textColor = .lightGray
+        self.smartSnipeLabel.textColor = SSColors.grainYellow
+        self.smartSnipeLabel.font = UIFont.preferredFont(forTextStyle: .headline)
+        
+        self.descriptionLabel.textColor = SSColors.platinum
         self.descriptionLabel.text = "Select an opening to open it next."
+        self.descriptionLabel.font = UIFont.preferredFont(forTextStyle: .headline)
+        
         let hockeyNetLayer = hockeyNetShapeLayer()
         self.hockeyNet.layer.addSublayer(hockeyNetLayer)
         self.constructCell()
@@ -70,7 +85,55 @@ class HockeyNetCell: UITableViewCell {
         return hockeyNetShapeLayer
     }
     
+    private func selected(hole: HockeyNetHole) {
+        self.deselectAllHoles()
+    }
+    
+    @objc private func selectedTopLeft() {
+        self.selected(hole: .topLeft)
+        self.topLeftHole.backgroundColor = SSColors.grainYellow
+    }
+    
+    @objc private func selectedTopRight() {
+        self.selected(hole: .topRight)
+        self.topRightHole.backgroundColor = SSColors.grainYellow
+    }
+    
+    @objc  private func selectedBottomLeft() {
+        self.selected(hole: .bottomLeft)
+        self.bottomLeftHole.backgroundColor = SSColors.grainYellow
+    }
+    
+    @objc private func selectedBottomRight() {
+        self.selected(hole: .bottomRight)
+        self.bottomRightHole.backgroundColor = SSColors.grainYellow
+    }
+    
+    @objc private func selectedFiveHole() {
+        self.selected(hole: .fiveHole)
+        self.fiveHole.backgroundColor = SSColors.grainYellow
+    }
+    
+    private func deselectAllHoles() {
+        [self.topLeftHole, self.topRightHole, self.bottomLeftHole, self.bottomRightHole, self.fiveHole].forEach {
+            $0.backgroundColor = .white
+        }
+    }
+    
     private func constructCell() {
+        let topLeftGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.selectedTopLeft))
+        let topRightGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.selectedTopRight))
+        let bottomLeftGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.selectedBottomLeft))
+        let bottomRightGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.selectedBottomRight))
+        let fiveHoleGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.selectedFiveHole))
+        
+        self.topLeftHole.addGestureRecognizer(topLeftGestureRecognizer)
+        self.topRightHole.addGestureRecognizer(topRightGestureRecognizer)
+        self.bottomLeftHole.addGestureRecognizer(bottomLeftGestureRecognizer)
+        self.bottomRightHole.addGestureRecognizer(bottomRightGestureRecognizer)
+        self.fiveHole.addGestureRecognizer(fiveHoleGestureRecognizer)
+        
+        
         [self.hockeyNet, self.descriptionLabel].forEach {
             self.contentView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -88,11 +151,13 @@ class HockeyNetCell: UITableViewCell {
         }
         self.smartSnipeLabel.backgroundColor = .black
         [self.topLeftHole, self.topRightHole, self.bottomLeftHole, self.bottomRightHole].forEach { hole in
+            hole.layer.cornerRadius = sizeOfHole/2
             NSLayoutConstraint.activate([
                 hole.widthAnchor.constraint(equalToConstant: sizeOfHole),
                 hole.heightAnchor.constraint(equalToConstant: sizeOfHole)
             ])
         }
+        self.fiveHole.layer.cornerRadius = sizeOfFiveHole/2
         
         NSLayoutConstraint.activate([
             self.hockeyNet.widthAnchor.constraint(equalToConstant: hockeyNetWidth),
@@ -128,8 +193,8 @@ class HockeyNetCell: UITableViewCell {
             self.bottomRightHole.bottomAnchor.constraint(
                 equalTo: self.hockeyNet.bottomAnchor,
                 constant: -offsetFromBottom),
-            self.fiveHole.widthAnchor.constraint(equalToConstant: 30),
-            self.fiveHole.heightAnchor.constraint(equalToConstant: 30),
+            self.fiveHole.widthAnchor.constraint(equalToConstant: sizeOfFiveHole),
+            self.fiveHole.heightAnchor.constraint(equalToConstant: sizeOfFiveHole),
             self.fiveHole.centerXAnchor.constraint(
                 equalTo: self.hockeyNet.centerXAnchor),
             self.fiveHole.bottomAnchor.constraint(

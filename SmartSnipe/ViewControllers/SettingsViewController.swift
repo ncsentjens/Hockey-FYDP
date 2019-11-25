@@ -19,6 +19,9 @@ struct SettingsViewModel {
 
 class SettingsViewController: UITableViewController {
     
+    private let cellHeight: CGFloat = 48.0
+    private let headerHeight: CGFloat = 52.0
+    
     private let settingsViewModel: SettingsViewModel = SettingsViewModel(
         numberOfSlotsThatOpen: 1,
         timeBetweenOpenings: 4,
@@ -28,10 +31,10 @@ class SettingsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView = UITableView(frame: .zero, style: .grouped)
-        self.tableView.separatorColor = .white
-        self.view.backgroundColor = .black
-        self.navigationController?.navigationBar.barTintColor = .black
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.gray]
+        self.tableView.separatorColor = SSColors.grainYellow
+        self.view.backgroundColor = SSColors.raisinBlack
+        self.navigationController?.navigationBar.barTintColor = SSColors.raisinBlack
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : SSColors.grainYellow]
         self.navigationItem.title = "Settings"
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "standard_settings_cell")
         self.tableView.register(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: "standard_header")
@@ -52,45 +55,55 @@ extension SettingsViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = UITableViewHeaderFooterView(reuseIdentifier: "standard_header")
         header.textLabel?.text = "Configuration"
-        header.textLabel?.textColor = .white
+        header.textLabel?.textColor = SSColors.platinum
         let backgroundView = UIView()
-        backgroundView.backgroundColor = .black
+        backgroundView.backgroundColor = SSColors.raisinBlack
         header.backgroundView = backgroundView
         return header
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 52.0
+        return headerHeight
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 48.0
+        return cellHeight
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        let cell = UITableViewCell(style: .value1, reuseIdentifier: "standard_settings_cell")
 
-        cell.backgroundColor = .black
-        cell.textLabel?.textColor = .lightGray
+        cell.backgroundColor = SSColors.raisinBlack
+        cell.textLabel?.textColor = SSColors.lightGray
         cell.tintColor = .red
         cell.accessoryView = UIImageView(image: UIImage(named: "chevron"), highlightedImage: nil)
+        
         switch indexPath.row {
         case 0:
-            cell.textLabel?.text = "Time Between Openings"
-            cell.detailTextLabel?.text = String(self.settingsViewModel.timeBetweenOpenings) + " s"
-            cell.imageView?.image = UIImage(named: "timer")
+            self.configure(cell: cell,
+                           text: "Time Between Openings",
+                           detailText: String(self.settingsViewModel.timeBetweenOpenings) + " s",
+                           imagaName: "timer")
         case 1:
-            cell.textLabel?.text = "# of Slots That Open at a Time"
-            cell.detailTextLabel?.text = String(self.settingsViewModel.numberOfSlotsThatOpen)
-            cell.imageView?.image = UIImage(named: "open")
+            self.configure(cell: cell,
+                           text: "# of Slots That Open at a Time",
+                           detailText: String(self.settingsViewModel.numberOfSlotsThatOpen),
+                           imagaName: "open")
         case 2:
-            cell.textLabel?.text = "Current Mode"
-            cell.detailTextLabel?.text = self.settingsViewModel.currentMode
-            cell.imageView?.image = UIImage(named: "goal")
+            self.configure(cell: cell,
+                           text: "Current Mode",
+                           detailText: self.settingsViewModel.currentMode,
+                           imagaName: "goal")
         default:
             fatalError("Unexpected index")
         }
         return cell
+    }
+    
+    private func configure(cell: UITableViewCell, text: String, detailText: String, imagaName: String) {
+        cell.textLabel?.text = text
+        cell.detailTextLabel?.text = detailText
+        cell.imageView?.image = UIImage(named: imagaName)
     }
 }
 

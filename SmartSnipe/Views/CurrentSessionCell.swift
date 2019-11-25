@@ -12,34 +12,40 @@ import UIKit
 class CurrentSessionCell: UITableViewCell {
     let descriptionLabel = UILabel()
     let stackView = UIStackView()
-    let accuracyLabel = UILabel()
-    let shotSpeedLabel = UILabel()
-    let reactionTimeLabel = UILabel()
+    let accuracyLabel = LeftRightLabel()
+    let shotSpeedLabel = LeftRightLabel()
+    let reactionTimeLabel = LeftRightLabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.contentView.backgroundColor = .black
+        self.contentView.backgroundColor = SSColors.raisinBlack
         
         self.stackView.spacing = 8
         self.stackView.axis = .vertical
         
-        self.descriptionLabel.textColor = .lightGray
+        self.descriptionLabel.textColor = SSColors.platinum
+        self.descriptionLabel.font = UIFont.preferredFont(forTextStyle: .headline)
         self.descriptionLabel.text = "Current Session"
         
-        self.accuracyLabel.text = "Accuracy: 4/10 (40%)"
-        self.shotSpeedLabel.text = "Average Shot Speed: 68 mph"
-        self.reactionTimeLabel.text = "Average Reaction Time: 0.3 seconds"
-        
-        [accuracyLabel, shotSpeedLabel, reactionTimeLabel].forEach {
-            $0.textColor = .white
-        }
+        self.accuracyLabel.set(leftText: "Accuracy", rightText: "4/10 (40%)")
+        self.shotSpeedLabel.set(leftText: "Average Shot Speed", rightText: "68 mph")
+        self.reactionTimeLabel.set(leftText: "Average Reaction Time", rightText: "0.3 Seconds")
         
         self.buildCell()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func addSeparator() {
+        let separator = SeparatorView()
+        self.stackView.addArrangedSubview(separator)
+        NSLayoutConstraint.activate([
+            separator.leadingAnchor.constraint(equalTo: self.stackView.leadingAnchor, constant: 12),
+            separator.trailingAnchor.constraint(equalTo: self.stackView.trailingAnchor, constant: -12)
+        ])
     }
     
     private func buildCell() {
@@ -50,8 +56,13 @@ class CurrentSessionCell: UITableViewCell {
         
         [self.accuracyLabel, self.shotSpeedLabel, self.reactionTimeLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
+            self.addSeparator()
             self.stackView.addArrangedSubview($0)
+            NSLayoutConstraint.activate([
+                $0.heightAnchor.constraint(equalToConstant: UIFont.preferredFont(forTextStyle: .body).lineHeight + 4)
+            ])
         }
+        self.addSeparator()
         
         NSLayoutConstraint.activate([
             self.descriptionLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 12),

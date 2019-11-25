@@ -23,10 +23,11 @@ class SessionsStatusCell: UITableViewCell {
         self.connectButton.setTitle("Connect", for: .normal)
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.contentView.backgroundColor = .black
+        self.contentView.backgroundColor = SSColors.raisinBlack
         self.statusImageView.contentMode = .scaleAspectFit
         
-        self.descriptionLabel.textColor = .lightGray
+        self.descriptionLabel.textColor = SSColors.platinum
+        self.descriptionLabel.font = UIFont.preferredFont(forTextStyle: .body)
         
         self.connectButton.setTitleColor(.green, for: .normal)
         

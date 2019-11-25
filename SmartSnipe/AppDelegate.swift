@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         tabBarController.selectedIndex = 0
         tabBarController.tabBar.barTintColor = .black
-        tabBarController.tabBar.tintColor = .yellow
+        tabBarController.tabBar.tintColor = SSColors.grainYellow
         tabBarController.tabBar.unselectedItemTintColor = .gray
         
         self.window?.rootViewController = tabBarController

@@ -11,9 +11,9 @@ import UIKit
 class StatsViewController: UIViewController {
 
     override func viewDidLoad() {
-        self.view.backgroundColor = .black
-        self.navigationController?.navigationBar.barTintColor = .black
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.gray]
+        self.view.backgroundColor = SSColors.raisinBlack
+        self.navigationController?.navigationBar.barTintColor = SSColors.raisinBlack
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : SSColors.grainYellow]
         self.navigationItem.title = "Stats"
         super.viewDidLoad()
     }

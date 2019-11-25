@@ -13,11 +13,11 @@ class SessionViewController: UIViewController {
     private let tableView: UITableView = UITableView()
 
     override func viewDidLoad() {
-        self.view.backgroundColor = .black
+        self.view.backgroundColor = SSColors.raisinBlack
         
         self.navigationItem.title = "Session"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.gray]
-        self.navigationController?.navigationBar.barTintColor = .black
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : SSColors.grainYellow]
+        self.navigationController?.navigationBar.barTintColor = SSColors.raisinBlack
         
         self.sessionButton.setTitle("End Session", for: .normal)
         self.sessionButton.setTitleColor(.red, for: .normal)
@@ -28,8 +28,8 @@ class SessionViewController: UIViewController {
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.separatorColor = .white
-        self.tableView.backgroundColor = .black
+        self.tableView.separatorColor = SSColors.grainYellow
+        self.tableView.backgroundColor = SSColors.raisinBlack
         self.tableView.register(SessionsStatusCell.self, forCellReuseIdentifier: "session_status_cell")
         self.tableView.register(HockeyNetCell.self, forCellReuseIdentifier: "hockey_net_cell")
         self.tableView.register(CurrentSessionCell.self, forCellReuseIdentifier: "current_session_cell")
@@ -69,7 +69,7 @@ extension SessionViewController: UITableViewDelegate, UITableViewDataSource {
         case 1:
             return 280
         case 2:
-            return 150
+            return 178
         default:
             return 80
         }
@@ -102,6 +102,10 @@ extension SessionViewController: UITableViewDelegate, UITableViewDataSource {
             fatalError()
         }
 
+    }
+    
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        return nil
     }
 }
 
