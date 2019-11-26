@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 class LeftRightLabel: UIView {
-    private let leftLabel = UILabel()
-    private let rightLabel = UILabel()
+    let leftLabel = UILabel()
+    let rightLabel = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)

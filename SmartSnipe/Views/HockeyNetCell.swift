@@ -26,13 +26,13 @@ class HockeyNetCell: UITableViewCell {
     private let descriptionLabel = UILabel()
     private let smartSnipeLabel = UILabel()
     
-    private let sizeOfHole: CGFloat = 50
-    private let sizeOfFiveHole: CGFloat = 35
+    private let sizeOfHole: CGFloat = 46
     private let offsetFromPost: CGFloat = 24.0
-    private let fiveHoleOffsetFromBottom: CGFloat = 24.0
-    private let offsetFromBottom: CGFloat = 40.0
+    private let offsetFromBottom: CGFloat = 24.0
     private let hockeyNetHeight: CGFloat = 200.0
     private let hockeyNetWidth: CGFloat = 300.0
+    
+    weak var delegate: HockeyNetDelegate?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -87,6 +87,7 @@ class HockeyNetCell: UITableViewCell {
     
     private func selected(hole: HockeyNetHole) {
         self.deselectAllHoles()
+        delegate?.holeWasSelected(hole: hole)
     }
     
     @objc private func selectedTopLeft() {
@@ -150,14 +151,13 @@ class HockeyNetCell: UITableViewCell {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         self.smartSnipeLabel.backgroundColor = .black
-        [self.topLeftHole, self.topRightHole, self.bottomLeftHole, self.bottomRightHole].forEach { hole in
+        [self.topLeftHole, self.topRightHole, self.bottomLeftHole, self.bottomRightHole, self.fiveHole].forEach { hole in
             hole.layer.cornerRadius = sizeOfHole/2
             NSLayoutConstraint.activate([
                 hole.widthAnchor.constraint(equalToConstant: sizeOfHole),
                 hole.heightAnchor.constraint(equalToConstant: sizeOfHole)
             ])
         }
-        self.fiveHole.layer.cornerRadius = sizeOfFiveHole/2
         
         NSLayoutConstraint.activate([
             self.hockeyNet.widthAnchor.constraint(equalToConstant: hockeyNetWidth),
@@ -193,13 +193,13 @@ class HockeyNetCell: UITableViewCell {
             self.bottomRightHole.bottomAnchor.constraint(
                 equalTo: self.hockeyNet.bottomAnchor,
                 constant: -offsetFromBottom),
-            self.fiveHole.widthAnchor.constraint(equalToConstant: sizeOfFiveHole),
-            self.fiveHole.heightAnchor.constraint(equalToConstant: sizeOfFiveHole),
+            self.fiveHole.widthAnchor.constraint(equalToConstant: sizeOfHole),
+            self.fiveHole.heightAnchor.constraint(equalToConstant: sizeOfHole),
             self.fiveHole.centerXAnchor.constraint(
                 equalTo: self.hockeyNet.centerXAnchor),
             self.fiveHole.bottomAnchor.constraint(
                 equalTo: self.hockeyNet.bottomAnchor,
-                constant: -fiveHoleOffsetFromBottom),
+                constant: -offsetFromBottom),
             self.descriptionLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 12),
             self.descriptionLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 12)
         ])
