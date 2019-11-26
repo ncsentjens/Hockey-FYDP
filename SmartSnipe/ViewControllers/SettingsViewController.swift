@@ -17,16 +17,27 @@ struct SettingsViewModel {
     var currentMode: String
 }
 
+protocol NumberOfSlotsThatOpenDelegate: class {
+    func numberOfSlotsThatOpenUpdated(_ numberOfSlots: Int)
+}
+
+protocol TimeBetweenOpeningsDelegate: class {
+    func timeBetweenOpeningsUpdated(_ timeBetweenOpenings: Float)
+}
+
+protocol CurrentModeDelegate: class {
+    func currentModeUpdated(_ currentMode: String)
+}
+
 class SettingsViewController: UITableViewController {
     
     private let cellHeight: CGFloat = 48.0
     private let headerHeight: CGFloat = 52.0
     
-    private let settingsViewModel: SettingsViewModel = SettingsViewModel(
+    private var settingsViewModel = SettingsViewModel(
         numberOfSlotsThatOpen: 1,
         timeBetweenOpenings: 4,
-        currentMode: "All Corners"
-        )
+        currentMode: "All Corners")
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,5 +116,63 @@ extension SettingsViewController {
         cell.detailTextLabel?.text = detailText
         cell.imageView?.image = UIImage(named: imagaName)
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0:
+            let viewModel = EditSettingsViewModel(
+                navigationTitleText: "Time Between Openings",
+                descriptionText: "Edit the number of seconds between slot openings.",
+                pickerValues: ["0.5", "1.0", "1.5", "2.0", "2.5"],
+                selectedPickerValue: "1.0")
+            let timeBetweenOpenings = TimeBetweenOpeningsViewController(viewModel: viewModel)
+            timeBetweenOpenings.delegate = self
+            self.navigationController?.pushViewController(timeBetweenOpenings, animated: true)
+        case 1:
+            let viewModel = EditSettingsViewModel(
+                navigationTitleText: "Slots That Open",
+                descriptionText: "Edit the number of slots that open at a time.",
+                pickerValues: ["1", "2"],
+                selectedPickerValue: "1")
+            let editSlotsViewController = SlotsThatOpenViewController(viewModel: viewModel)
+            editSlotsViewController.delegate = self
+            self.navigationController?.pushViewController(editSlotsViewController, animated: true)
+        case 2:
+            let viewModel = EditSettingsViewModel(
+                navigationTitleText: "Current Mode",
+                descriptionText: "Edit the current shooting mode.",
+                pickerValues: ["All Corners", "Top Shelf Only"],
+                selectedPickerValue: "All Corners")
+            let editModeViewController = CurrentModeViewController(viewModel: viewModel)
+            editModeViewController.delegate = self
+            self.navigationController?.pushViewController(editModeViewController, animated: true)
+        default:
+            break
+        }
+    }
 }
 
+extension SettingsViewController: TimeBetweenOpeningsDelegate {
+    func timeBetweenOpeningsUpdated(_ timeBetweenOpenings: Float) {
+        self.settingsViewModel.timeBetweenOpenings = timeBetweenOpenings
+        self.tableView.reloadData()
+    }
+    
+    
+}
+
+extension SettingsViewController: NumberOfSlotsThatOpenDelegate {
+    func numberOfSlotsThatOpenUpdated(_ numberOfSlots: Int) {
+        self.settingsViewModel.numberOfSlotsThatOpen = numberOfSlots
+        self.tableView.reloadData()
+    }
+    
+    
+}
+
+extension SettingsViewController: CurrentModeDelegate {
+    func currentModeUpdated(_ currentMode: String) {
+        self.settingsViewModel.currentMode = currentMode
+        self.tableView.reloadData()
+    }
+}
