@@ -28,9 +28,9 @@ class LeftRightLabel: UIView {
         }
         
         NSLayoutConstraint.activate([
-            self.leftLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 12),
+            self.leftLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: SSMargins.large),
             self.leftLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            self.rightLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -12),
+            self.rightLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -SSMargins.large),
             self.rightLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor)
         ])
         

@@ -9,6 +9,11 @@
 import Foundation
 import UIKit
 
+enum ShootingMode: String {
+    case allCorners = "All Corners"
+    case topCorners = "Top Corners"
+}
+
 class CurrentModeViewController: EditSettingsViewController {
     weak var delegate: CurrentModeDelegate?
     

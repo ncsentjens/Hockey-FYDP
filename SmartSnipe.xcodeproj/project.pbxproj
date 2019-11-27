@@ -16,6 +16,7 @@
 		0169C416238D841300EEBAB5 /* CurrentModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169C415238D841300EEBAB5 /* CurrentModeViewController.swift */; };
 		0169C419238DF0BB00EEBAB5 /* TimeSlotsOpenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169C418238DF0BB00EEBAB5 /* TimeSlotsOpenViewController.swift */; };
 		0169C41B238E0AA900EEBAB5 /* SSBluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169C41A238E0AA900EEBAB5 /* SSBluetoothManager.swift */; };
+		0169C41E238E2D0400EEBAB5 /* SSMargins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169C41D238E2D0400EEBAB5 /* SSMargins.swift */; };
 		0176B35D2378790E000562B3 /* SessionStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0176B35C2378790E000562B3 /* SessionStatusCell.swift */; };
 		0176B35F2378FC5E000562B3 /* HockeyNetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0176B35E2378FC5E000562B3 /* HockeyNetCell.swift */; };
 		01ACB31C23736918003ACBF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ACB31B23736918003ACBF4 /* AppDelegate.swift */; };
@@ -49,6 +50,7 @@
 		0169C415238D841300EEBAB5 /* CurrentModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentModeViewController.swift; sourceTree = "<group>"; };
 		0169C418238DF0BB00EEBAB5 /* TimeSlotsOpenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSlotsOpenViewController.swift; sourceTree = "<group>"; };
 		0169C41A238E0AA900EEBAB5 /* SSBluetoothManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSBluetoothManager.swift; sourceTree = "<group>"; };
+		0169C41D238E2D0400EEBAB5 /* SSMargins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSMargins.swift; sourceTree = "<group>"; };
 		0176B35C2378790E000562B3 /* SessionStatusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStatusCell.swift; sourceTree = "<group>"; };
 		0176B35E2378FC5E000562B3 /* HockeyNetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HockeyNetCell.swift; sourceTree = "<group>"; };
 		01ACB31823736918003ACBF4 /* SmartSnipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartSnipe.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,6 +97,15 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		0169C41C238E2CE700EEBAB5 /* UIHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				0169C409238C426600EEBAB5 /* SSColors.swift */,
+				0169C41D238E2D0400EEBAB5 /* SSMargins.swift */,
+			);
+			path = UIHelpers;
+			sourceTree = "<group>";
+		};
 		01ACB30F23736918003ACBF4 = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +127,7 @@
 		01ACB31A23736918003ACBF4 /* SmartSnipe */ = {
 			isa = PBXGroup;
 			children = (
+				0169C41C238E2CE700EEBAB5 /* UIHelpers */,
 				01ACB33F237369B6003ACBF4 /* Managers */,
 				01ACB33E237369AC003ACBF4 /* Views */,
 				01ACB33D2373699B003ACBF4 /* ViewControllers */,
@@ -124,7 +136,6 @@
 				01ACB3242373691C003ACBF4 /* Assets.xcassets */,
 				01ACB3262373691C003ACBF4 /* LaunchScreen.storyboard */,
 				01ACB3292373691C003ACBF4 /* Info.plist */,
-				0169C409238C426600EEBAB5 /* SSColors.swift */,
 			);
 			path = SmartSnipe;
 			sourceTree = "<group>";
@@ -282,6 +293,7 @@
 				01ACB31C23736918003ACBF4 /* AppDelegate.swift in Sources */,
 				0169C416238D841300EEBAB5 /* CurrentModeViewController.swift in Sources */,
 				0169C410238D6F5D00EEBAB5 /* TimeBetweenOpeningsViewController.swift in Sources */,
+				0169C41E238E2D0400EEBAB5 /* SSMargins.swift in Sources */,
 				01ACB341237369F6003ACBF4 /* StatsViewController.swift in Sources */,
 				01ACB34323736A02003ACBF4 /* SettingsViewController.swift in Sources */,
 				0169C40C238C70C200EEBAB5 /* LeftRightLabel.swift in Sources */,

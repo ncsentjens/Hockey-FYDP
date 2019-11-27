@@ -43,10 +43,10 @@ class SessionsStatusCell: UITableViewCell {
         }
         
         NSLayoutConstraint.activate([
-            self.stackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 12),
-            self.stackView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 12),
-            self.stackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -12),
-            self.stackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -12)
+            self.stackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: SSMargins.large),
+            self.stackView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: SSMargins.large),
+            self.stackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -SSMargins.large),
+            self.stackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -SSMargins.large)
         ])
 
     }

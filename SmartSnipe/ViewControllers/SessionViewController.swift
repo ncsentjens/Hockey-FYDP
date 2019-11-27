@@ -80,14 +80,14 @@ class SessionViewController: UIViewController {
         self.view.addSubview(self.sessionButton)
         self.view.addSubview(self.tableView)
         NSLayoutConstraint.activate([
-            self.sessionButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
-            self.sessionButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16),
-            self.sessionButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            self.sessionButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: SSMargins.massive),
+            self.sessionButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -SSMargins.massive),
+            self.sessionButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -SSMargins.large),
             self.sessionButton.heightAnchor.constraint(equalToConstant: 40),
             self.tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            self.tableView.bottomAnchor.constraint(equalTo: self.sessionButton.topAnchor, constant: -12)
+            self.tableView.bottomAnchor.constraint(equalTo: self.sessionButton.topAnchor, constant: -SSMargins.large)
         ])
     }
     

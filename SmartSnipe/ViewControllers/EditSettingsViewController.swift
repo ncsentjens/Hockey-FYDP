@@ -36,6 +36,12 @@ class EditSettingsViewController: UIViewController {
         
         self.view.backgroundColor = SSColors.jet
         
+        let selectedPickerIndex = self.viewModel.pickerValues.firstIndex { (pickerValue) -> Bool in
+            return pickerValue == self.viewModel.selectedPickerValue
+        } ?? 0
+        
+        self.pickerView.selectRow(selectedPickerIndex, inComponent: 0, animated: true)
+        
         self.navigationController?.navigationBar.barTintColor = SSColors.raisinBlack
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : SSColors.grainYellow]
         
@@ -63,12 +69,12 @@ class EditSettingsViewController: UIViewController {
         self.pickerView.tintColor = SSColors.grainYellow
         
         NSLayoutConstraint.activate([
-            self.descriptionLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 12),
-            self.descriptionLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            self.descriptionLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -12),
-            self.pickerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 12),
-            self.pickerView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -12),
-            self.pickerView.topAnchor.constraint(equalTo: self.descriptionLabel.bottomAnchor, constant: 12),
+            self.descriptionLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: SSMargins.large),
+            self.descriptionLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: SSMargins.massive),
+            self.descriptionLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -SSMargins.large),
+            self.pickerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: SSMargins.large),
+            self.pickerView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -SSMargins.large),
+            self.pickerView.topAnchor.constraint(equalTo: self.descriptionLabel.bottomAnchor, constant: SSMargins.large),
             self.pickerView.heightAnchor.constraint(equalToConstant: 140)
         ])
     }

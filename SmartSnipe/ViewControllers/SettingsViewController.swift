@@ -15,8 +15,8 @@ struct SettingsViewModel {
     var timeSlotIsOpen: Float
     // Slots that open each time.
     var numberOfSlotsThatOpen: Int
-
-    var currentMode: String
+    // Net shooting mode
+    var currentMode: ShootingMode
 }
 
 protocol NumberOfSlotsThatOpenDelegate: class {
@@ -42,7 +42,7 @@ class SettingsViewController: UITableViewController {
     private var settingsViewModel = SettingsViewModel(timeBetweenOpenings: 4,
                                                       timeSlotIsOpen: 1.5,
                                                       numberOfSlotsThatOpen: 1,
-                                                      currentMode: "All Corners")
+                                                      currentMode: ShootingMode.allCorners)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,7 +113,7 @@ extension SettingsViewController {
         case 3:
             self.configure(cell: cell,
                            text: "Current Mode",
-                           detailText: self.settingsViewModel.currentMode,
+                           detailText: self.settingsViewModel.currentMode.rawValue,
                            imagaName: "goal")
         default:
             fatalError("Unexpected index")
@@ -133,8 +133,8 @@ extension SettingsViewController {
             let viewModel = EditSettingsViewModel(
                 navigationTitleText: "Time Between Openings",
                 descriptionText: "Edit the number of seconds between slot openings.",
-                pickerValues: ["0.5", "1.0", "1.5", "2.0", "2.5"],
-                selectedPickerValue: "1.0")
+                pickerValues: ["0.5", "1.0", "1.5", "2.0", "2.5", "3.0", "3.5", "4.0", "4.5", "5.0"],
+                selectedPickerValue: String(self.settingsViewModel.timeBetweenOpenings))
             let timeBetweenOpenings = TimeBetweenOpeningsViewController(viewModel: viewModel)
             timeBetweenOpenings.delegate = self
             self.navigationController?.pushViewController(timeBetweenOpenings, animated: true)
@@ -143,7 +143,7 @@ extension SettingsViewController {
                 navigationTitleText: "Time Slot is Open",
                 descriptionText: "Edit the number of seconds the slot is open.",
                 pickerValues: ["0.5", "1.0", "1.5", "2.0", "2.5"],
-                selectedPickerValue: "1.0")
+                selectedPickerValue: String(self.settingsViewModel.timeSlotIsOpen))
             let timeSlotsOpen = TimeSlotsOpenViewController(viewModel: viewModel)
             timeSlotsOpen.delegate = self
             self.navigationController?.pushViewController(timeSlotsOpen, animated: true)
@@ -152,7 +152,7 @@ extension SettingsViewController {
                 navigationTitleText: "Slots That Open",
                 descriptionText: "Edit the number of slots that open at a time.",
                 pickerValues: ["1", "2"],
-                selectedPickerValue: "1")
+                selectedPickerValue: String(self.settingsViewModel.numberOfSlotsThatOpen))
             let editSlotsViewController = SlotsThatOpenViewController(viewModel: viewModel)
             editSlotsViewController.delegate = self
             self.navigationController?.pushViewController(editSlotsViewController, animated: true)
@@ -160,8 +160,8 @@ extension SettingsViewController {
             let viewModel = EditSettingsViewModel(
                 navigationTitleText: "Current Mode",
                 descriptionText: "Edit the current shooting mode.",
-                pickerValues: ["All Corners", "Top Shelf Only"],
-                selectedPickerValue: "All Corners")
+                pickerValues: [ShootingMode.allCorners.rawValue, ShootingMode.topCorners.rawValue],
+                selectedPickerValue: self.settingsViewModel.currentMode.rawValue)
             let editModeViewController = CurrentModeViewController(viewModel: viewModel)
             editModeViewController.delegate = self
             self.navigationController?.pushViewController(editModeViewController, animated: true)
@@ -194,7 +194,7 @@ extension SettingsViewController: NumberOfSlotsThatOpenDelegate {
 
 extension SettingsViewController: CurrentModeDelegate {
     func currentModeUpdated(_ currentMode: String) {
-        self.settingsViewModel.currentMode = currentMode
+        self.settingsViewModel.currentMode = ShootingMode(rawValue: currentMode) ?? .allCorners
         self.tableView.reloadData()
     }
 }

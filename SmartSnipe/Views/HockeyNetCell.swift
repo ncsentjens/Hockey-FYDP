@@ -200,8 +200,8 @@ class HockeyNetCell: UITableViewCell {
             self.fiveHole.bottomAnchor.constraint(
                 equalTo: self.hockeyNet.bottomAnchor,
                 constant: -offsetFromBottom),
-            self.descriptionLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 12),
-            self.descriptionLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 12)
+            self.descriptionLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: SSMargins.large),
+            self.descriptionLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: SSMargins.large)
         ])
     }
 }
