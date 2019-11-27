@@ -9,11 +9,13 @@
 import UIKit
 
 struct SettingsViewModel {
-    // Slots that open each time.
-    var numberOfSlotsThatOpen: Int
     // Time in seconds between opening
     var timeBetweenOpenings: Float
-    
+    // Time in seconds that slot is open for
+    var timeSlotIsOpen: Float
+    // Slots that open each time.
+    var numberOfSlotsThatOpen: Int
+
     var currentMode: String
 }
 
@@ -25,6 +27,10 @@ protocol TimeBetweenOpeningsDelegate: class {
     func timeBetweenOpeningsUpdated(_ timeBetweenOpenings: Float)
 }
 
+protocol TimeSlotsOpenDelegate: class {
+    func timeSlotsOpenUpdated(_ timeOpen: Float)
+}
+
 protocol CurrentModeDelegate: class {
     func currentModeUpdated(_ currentMode: String)
 }
@@ -33,12 +39,11 @@ class SettingsViewController: UITableViewController {
     
     private let cellHeight: CGFloat = 48.0
     private let headerHeight: CGFloat = 52.0
+    private var settingsViewModel = SettingsViewModel(timeBetweenOpenings: 4,
+                                                      timeSlotIsOpen: 1.5,
+                                                      numberOfSlotsThatOpen: 1,
+                                                      currentMode: "All Corners")
     
-    private var settingsViewModel = SettingsViewModel(
-        numberOfSlotsThatOpen: 1,
-        timeBetweenOpenings: 4,
-        currentMode: "All Corners")
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView = UITableView(frame: .zero, style: .grouped)
@@ -56,7 +61,7 @@ class SettingsViewController: UITableViewController {
 extension SettingsViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 4
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -97,10 +102,15 @@ extension SettingsViewController {
                            imagaName: "timer")
         case 1:
             self.configure(cell: cell,
+                           text: "Time Slot is Open",
+                           detailText: String(self.settingsViewModel.timeSlotIsOpen) + " s",
+                           imagaName: "hourglass")
+        case 2:
+            self.configure(cell: cell,
                            text: "# of Slots That Open at a Time",
                            detailText: String(self.settingsViewModel.numberOfSlotsThatOpen),
                            imagaName: "open")
-        case 2:
+        case 3:
             self.configure(cell: cell,
                            text: "Current Mode",
                            detailText: self.settingsViewModel.currentMode,
@@ -130,6 +140,15 @@ extension SettingsViewController {
             self.navigationController?.pushViewController(timeBetweenOpenings, animated: true)
         case 1:
             let viewModel = EditSettingsViewModel(
+                navigationTitleText: "Time Slot is Open",
+                descriptionText: "Edit the number of seconds the slot is open.",
+                pickerValues: ["0.5", "1.0", "1.5", "2.0", "2.5"],
+                selectedPickerValue: "1.0")
+            let timeSlotsOpen = TimeSlotsOpenViewController(viewModel: viewModel)
+            timeSlotsOpen.delegate = self
+            self.navigationController?.pushViewController(timeSlotsOpen, animated: true)
+        case 2:
+            let viewModel = EditSettingsViewModel(
                 navigationTitleText: "Slots That Open",
                 descriptionText: "Edit the number of slots that open at a time.",
                 pickerValues: ["1", "2"],
@@ -137,7 +156,7 @@ extension SettingsViewController {
             let editSlotsViewController = SlotsThatOpenViewController(viewModel: viewModel)
             editSlotsViewController.delegate = self
             self.navigationController?.pushViewController(editSlotsViewController, animated: true)
-        case 2:
+        case 3:
             let viewModel = EditSettingsViewModel(
                 navigationTitleText: "Current Mode",
                 descriptionText: "Edit the current shooting mode.",
@@ -157,8 +176,13 @@ extension SettingsViewController: TimeBetweenOpeningsDelegate {
         self.settingsViewModel.timeBetweenOpenings = timeBetweenOpenings
         self.tableView.reloadData()
     }
-    
-    
+}
+
+extension SettingsViewController: TimeSlotsOpenDelegate {
+    func timeSlotsOpenUpdated(_ timeOpen: Float) {
+        self.settingsViewModel.timeSlotIsOpen = timeOpen
+        self.tableView.reloadData()
+    }
 }
 
 extension SettingsViewController: NumberOfSlotsThatOpenDelegate {
@@ -166,8 +190,6 @@ extension SettingsViewController: NumberOfSlotsThatOpenDelegate {
         self.settingsViewModel.numberOfSlotsThatOpen = numberOfSlots
         self.tableView.reloadData()
     }
-    
-    
 }
 
 extension SettingsViewController: CurrentModeDelegate {

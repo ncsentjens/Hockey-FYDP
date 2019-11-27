@@ -14,6 +14,8 @@
 		0169C412238D7D7C00EEBAB5 /* EditSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169C411238D7D7C00EEBAB5 /* EditSettingsViewController.swift */; };
 		0169C414238D82EE00EEBAB5 /* SlotsThatOpenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169C413238D82EE00EEBAB5 /* SlotsThatOpenViewController.swift */; };
 		0169C416238D841300EEBAB5 /* CurrentModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169C415238D841300EEBAB5 /* CurrentModeViewController.swift */; };
+		0169C419238DF0BB00EEBAB5 /* TimeSlotsOpenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169C418238DF0BB00EEBAB5 /* TimeSlotsOpenViewController.swift */; };
+		0169C41B238E0AA900EEBAB5 /* SSBluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169C41A238E0AA900EEBAB5 /* SSBluetoothManager.swift */; };
 		0176B35D2378790E000562B3 /* SessionStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0176B35C2378790E000562B3 /* SessionStatusCell.swift */; };
 		0176B35F2378FC5E000562B3 /* HockeyNetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0176B35E2378FC5E000562B3 /* HockeyNetCell.swift */; };
 		01ACB31C23736918003ACBF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ACB31B23736918003ACBF4 /* AppDelegate.swift */; };
@@ -45,6 +47,8 @@
 		0169C411238D7D7C00EEBAB5 /* EditSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSettingsViewController.swift; sourceTree = "<group>"; };
 		0169C413238D82EE00EEBAB5 /* SlotsThatOpenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlotsThatOpenViewController.swift; sourceTree = "<group>"; };
 		0169C415238D841300EEBAB5 /* CurrentModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentModeViewController.swift; sourceTree = "<group>"; };
+		0169C418238DF0BB00EEBAB5 /* TimeSlotsOpenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSlotsOpenViewController.swift; sourceTree = "<group>"; };
+		0169C41A238E0AA900EEBAB5 /* SSBluetoothManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSBluetoothManager.swift; sourceTree = "<group>"; };
 		0176B35C2378790E000562B3 /* SessionStatusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStatusCell.swift; sourceTree = "<group>"; };
 		0176B35E2378FC5E000562B3 /* HockeyNetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HockeyNetCell.swift; sourceTree = "<group>"; };
 		01ACB31823736918003ACBF4 /* SmartSnipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartSnipe.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,6 +84,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0169C417238DF04400EEBAB5 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				0169C40F238D6F5D00EEBAB5 /* TimeBetweenOpeningsViewController.swift */,
+				0169C413238D82EE00EEBAB5 /* SlotsThatOpenViewController.swift */,
+				0169C415238D841300EEBAB5 /* CurrentModeViewController.swift */,
+				0169C418238DF0BB00EEBAB5 /* TimeSlotsOpenViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		01ACB30F23736918003ACBF4 = {
 			isa = PBXGroup;
 			children = (
@@ -127,12 +142,10 @@
 			isa = PBXGroup;
 			children = (
 				01ACB31F23736918003ACBF4 /* SessionViewController.swift */,
+				0169C417238DF04400EEBAB5 /* Settings */,
 				01ACB340237369F6003ACBF4 /* StatsViewController.swift */,
 				01ACB34223736A02003ACBF4 /* SettingsViewController.swift */,
-				0169C40F238D6F5D00EEBAB5 /* TimeBetweenOpeningsViewController.swift */,
 				0169C411238D7D7C00EEBAB5 /* EditSettingsViewController.swift */,
-				0169C413238D82EE00EEBAB5 /* SlotsThatOpenViewController.swift */,
-				0169C415238D841300EEBAB5 /* CurrentModeViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -152,6 +165,7 @@
 		01ACB33F237369B6003ACBF4 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				0169C41A238E0AA900EEBAB5 /* SSBluetoothManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -257,7 +271,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0169C419238DF0BB00EEBAB5 /* TimeSlotsOpenViewController.swift in Sources */,
 				0176B35F2378FC5E000562B3 /* HockeyNetCell.swift in Sources */,
+				0169C41B238E0AA900EEBAB5 /* SSBluetoothManager.swift in Sources */,
 				0169C40A238C426600EEBAB5 /* SSColors.swift in Sources */,
 				0169C414238D82EE00EEBAB5 /* SlotsThatOpenViewController.swift in Sources */,
 				0169C40E238C758600EEBAB5 /* SeparatorView.swift in Sources */,
