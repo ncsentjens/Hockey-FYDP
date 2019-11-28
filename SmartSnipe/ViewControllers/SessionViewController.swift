@@ -12,29 +12,27 @@ protocol HockeyNetDelegate: class {
     func holeWasSelected(hole: HockeyNetHole)
 }
 
-struct SessionViewModel {
+struct SessionViewControllerViewModel {
     var isNetConnected: Bool
     var isSessionInProgress: Bool
     var sessionStart: Date?
-    var shotsTaken: Int
-    var shotsMade: Int
-    var averageShotSpeed: Float
-    var averageReactionTime: Float
+    var sessionViewModel: SessionViewModel
 }
 
 class SessionViewController: UIViewController {
     private let sessionButton: UIButton = UIButton()
     private let tableView: UITableView = UITableView()
-    private var viewModel: SessionViewModel
+    private var viewModel: SessionViewControllerViewModel
     
     init() {
-        self.viewModel = SessionViewModel(isNetConnected: true,
-                                          isSessionInProgress: false,
-                                          sessionStart: nil,
-                                          shotsTaken: 0,
-                                          shotsMade: 0,
-                                          averageShotSpeed: 0,
-                                          averageReactionTime: 0
+        let sessionViewModel = SessionViewModel(shotsTaken: 10,
+                                                shotsMade: 4,
+                                                averageShotSpeed: 67.9,
+                                                averageReactionTime: 0.43)
+        self.viewModel = SessionViewControllerViewModel(isNetConnected: true,
+                                                        isSessionInProgress: false,
+                                                        sessionStart: nil,
+                                                        sessionViewModel: sessionViewModel
         )
         super.init(nibName: nil, bundle: nil)
     }
@@ -152,9 +150,10 @@ extension SessionViewController: UITableViewDelegate, UITableViewDataSource {
             cell.delegate = self
             return cell
         case 2:
-            guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "current_session_cell") else {
+            guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "current_session_cell") as? CurrentSessionCell else {
                 fatalError()
             }
+            cell.applyViewModel(viewModel: self.viewModel.sessionViewModel)
             return cell
         default:
             fatalError()

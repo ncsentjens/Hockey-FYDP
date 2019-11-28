@@ -9,6 +9,13 @@
 import Foundation
 import UIKit
 
+struct SessionViewModel {
+    var shotsTaken: Int
+    var shotsMade: Int
+    var averageShotSpeed: Float
+    var averageReactionTime: Float
+}
+
 class CurrentSessionCell: UITableViewCell {
     let descriptionLabel = UILabel()
     let stackView = UIStackView()
@@ -27,10 +34,6 @@ class CurrentSessionCell: UITableViewCell {
         self.descriptionLabel.textColor = SSColors.platinum
         self.descriptionLabel.font = UIFont.preferredFont(forTextStyle: .headline)
         self.descriptionLabel.text = "Current Session"
-        
-        self.accuracyLabel.set(leftText: "Accuracy", rightText: "4/10 (40%)")
-        self.shotSpeedLabel.set(leftText: "Average Shot Speed", rightText: "68 mph")
-        self.reactionTimeLabel.set(leftText: "Average Reaction Time", rightText: "0.3 Seconds")
         
         self.buildCell()
     }
@@ -72,5 +75,25 @@ class CurrentSessionCell: UITableViewCell {
             self.stackView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -SSMargins.large),
             self.stackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -SSMargins.large)
         ])
+    }
+    
+    func applyViewModel(viewModel: SessionViewModel) {
+        // Accuracy Label
+        let shootingPercentage: Float
+        if (viewModel.shotsTaken == 0) {
+            shootingPercentage = 0.0
+        } else {
+            shootingPercentage = Float(viewModel.shotsMade) / Float(viewModel.shotsTaken) * 100
+        }
+        let accuracyText = String(viewModel.shotsMade) + "/" + String(viewModel.shotsTaken) + " (" + String(shootingPercentage) + "%)"
+        self.accuracyLabel.set(leftText: "Accuracy", rightText: accuracyText)
+        
+        // Shot speed label
+        let shotSpeedText = String(viewModel.averageShotSpeed) + " mph"
+        self.shotSpeedLabel.set(leftText: "Average Shot Speed", rightText: shotSpeedText)
+        
+        // Reaction time label
+        let reactionTimeText = String(viewModel.averageReactionTime) + " s"
+        self.reactionTimeLabel.set(leftText: "Average Reaction Time", rightText: reactionTimeText)
     }
 }
