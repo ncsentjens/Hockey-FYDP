@@ -10,10 +10,15 @@ import Foundation
 import UIKit
 
 struct SessionViewModel {
-    var shotsTaken: Int
-    var shotsMade: Int
+    var shots: Int
+    var goals: Int
     var averageShotSpeed: Float
     var averageReactionTime: Float
+    var sessionDate: Date
+    
+    func shootingPercentage() -> Float {
+        return round((Float(self.goals) / Float(self.shots) * 10 * 100)) / 10
+    }
 }
 
 class CurrentSessionCell: UITableViewCell {
@@ -80,12 +85,12 @@ class CurrentSessionCell: UITableViewCell {
     func applyViewModel(viewModel: SessionViewModel) {
         // Accuracy Label
         let shootingPercentage: Float
-        if (viewModel.shotsTaken == 0) {
+        if (viewModel.shots == 0) {
             shootingPercentage = 0.0
         } else {
-            shootingPercentage = Float(viewModel.shotsMade) / Float(viewModel.shotsTaken) * 100
+            shootingPercentage = Float(viewModel.goals) / Float(viewModel.shots) * 100
         }
-        let accuracyText = String(viewModel.shotsMade) + "/" + String(viewModel.shotsTaken) + " (" + String(shootingPercentage) + "%)"
+        let accuracyText = String(viewModel.goals) + "/" + String(viewModel.shots) + " (" + String(shootingPercentage) + "%)"
         self.accuracyLabel.set(leftText: "Accuracy", rightText: accuracyText)
         
         // Shot speed label

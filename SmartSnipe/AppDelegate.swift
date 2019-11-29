@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                     image: UIImage(named: "unselected_hockey"),
                                                     selectedImage: UIImage(named: "selected_hockey"))
         
-        let statsViewController = StatsViewController()
+        let statsViewController = StatsViewController(style: .grouped)
         statsViewController.tabBarItem = UITabBarItem(title: "Stats",
                                                       image: UIImage(named: "unselected_stats"),
                                                       selectedImage: UIImage(named: "selected_stats"))

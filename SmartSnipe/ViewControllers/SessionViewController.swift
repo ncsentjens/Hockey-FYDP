@@ -25,10 +25,11 @@ class SessionViewController: UIViewController {
     private var viewModel: SessionViewControllerViewModel
     
     init() {
-        let sessionViewModel = SessionViewModel(shotsTaken: 10,
-                                                shotsMade: 4,
+        let sessionViewModel = SessionViewModel(shots: 10,
+                                                goals: 4,
                                                 averageShotSpeed: 67.9,
-                                                averageReactionTime: 0.43)
+                                                averageReactionTime: 0.43,
+                                                sessionDate: Date())
         self.viewModel = SessionViewControllerViewModel(isNetConnected: true,
                                                         isSessionInProgress: false,
                                                         sessionStart: nil,

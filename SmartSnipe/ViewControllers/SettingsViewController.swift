@@ -38,7 +38,6 @@ protocol CurrentModeDelegate: class {
 class SettingsViewController: UITableViewController {
     
     private let cellHeight: CGFloat = 48.0
-    private let headerHeight: CGFloat = 52.0
     private var settingsViewModel = SettingsViewModel(timeBetweenOpenings: 4,
                                                       timeSlotIsOpen: 1.5,
                                                       numberOfSlotsThatOpen: 1,
@@ -69,17 +68,13 @@ extension SettingsViewController {
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = UITableViewHeaderFooterView(reuseIdentifier: "standard_header")
+        let header = SSTableViewHeaderView(reuseIdentifier: "standard_header")
         header.textLabel?.text = "Configuration"
-        header.textLabel?.textColor = SSColors.platinum
-        let backgroundView = UIView()
-        backgroundView.backgroundColor = SSColors.raisinBlack
-        header.backgroundView = backgroundView
         return header
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return headerHeight
+        return SSTableViewHeaderView.height
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
