@@ -69,8 +69,14 @@ class RecentSessionCell: UITableViewCell {
     }
     
     func applySession(sessionViewModel: SessionViewModel, backgroundColor: UIColor) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "LLLL"
+        let sessionMonth = dateFormatter.string(from: sessionViewModel.sessionDate)
+        let calendar = Calendar.current
+        let sessionDayOfMonth = calendar.dateComponents([.day], from: sessionViewModel.sessionDate).day ?? 1
+        
         self.contentView.backgroundColor = backgroundColor
-        self.dateLabel.text = sessionViewModel.sessionDate.description
+        self.dateLabel.text = sessionMonth + " " + String (sessionDayOfMonth)
         self.goalsLabel.text = String(sessionViewModel.goals)
         self.shotsLabel.text = String(sessionViewModel.shots)
         self.shotsPercentageLabel.text = String(sessionViewModel.shootingPercentage())

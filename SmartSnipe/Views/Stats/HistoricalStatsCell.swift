@@ -48,7 +48,7 @@ class HistoricalStatsCell: UITableViewCell {
     
     private func constructCell() {
         self.contentView.addSubview(self.stackView)
-        self.contentView.backgroundColor = SSColors.raisinBlack
+        self.contentView.backgroundColor = SSColors.jet
         [self.goalsLabel, self.shotsLabel, self.shootingPercentageLabel, self.shotsSpeedLabel, self.reactionTimeLabel].forEach { label in
             label.translatesAutoresizingMaskIntoConstraints = false
             self.stackView.addArrangedSubview(label)
