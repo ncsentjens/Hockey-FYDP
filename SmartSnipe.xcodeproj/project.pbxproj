@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		010D911C23E09AAA00AAFCE1 /* SmartSnipe.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 010D911A23E09AAA00AAFCE1 /* SmartSnipe.xcdatamodeld */; };
+		010D914F23E09ED000AAFCE1 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010D914E23E09ED000AAFCE1 /* CoreDataManager.swift */; };
 		01353FE42390568F00650895 /* RecentSessionHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01353FE32390568F00650895 /* RecentSessionHeaderCell.swift */; };
 		01353FE62390706900650895 /* StatsLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01353FE52390706900650895 /* StatsLabelView.swift */; };
 		0169C40A238C426600EEBAB5 /* SSColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169C409238C426600EEBAB5 /* SSColors.swift */; };
@@ -46,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		010D911B23E09AAA00AAFCE1 /* SessionDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SessionDataModel.xcdatamodel; sourceTree = "<group>"; };
+		010D914E23E09ED000AAFCE1 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		01353FE32390568F00650895 /* RecentSessionHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSessionHeaderCell.swift; sourceTree = "<group>"; };
 		01353FE52390706900650895 /* StatsLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsLabelView.swift; sourceTree = "<group>"; };
 		0169C409238C426600EEBAB5 /* SSColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSColors.swift; sourceTree = "<group>"; };
@@ -130,6 +134,7 @@
 		01ACB30F23736918003ACBF4 = {
 			isa = PBXGroup;
 			children = (
+				010D911A23E09AAA00AAFCE1 /* SmartSnipe.xcdatamodeld */,
 				01ACB31A23736918003ACBF4 /* SmartSnipe */,
 				01ACB3312373691D003ACBF4 /* SmartSnipeTests */,
 				01ACB31923736918003ACBF4 /* Products */,
@@ -200,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				0169C41A238E0AA900EEBAB5 /* SSBluetoothManager.swift */,
+				010D914E23E09ED000AAFCE1 /* CoreDataManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -311,12 +317,14 @@
 				0169C41B238E0AA900EEBAB5 /* SSBluetoothManager.swift in Sources */,
 				0169C40A238C426600EEBAB5 /* SSColors.swift in Sources */,
 				0169C414238D82EE00EEBAB5 /* SlotsThatOpenViewController.swift in Sources */,
+				010D914F23E09ED000AAFCE1 /* CoreDataManager.swift in Sources */,
 				0169C40E238C758600EEBAB5 /* SeparatorView.swift in Sources */,
 				0169C424239053C000EEBAB5 /* RecentSessionCell.swift in Sources */,
 				0176B35D2378790E000562B3 /* SessionStatusCell.swift in Sources */,
 				01ACB32023736918003ACBF4 /* SessionViewController.swift in Sources */,
 				01ACB31C23736918003ACBF4 /* AppDelegate.swift in Sources */,
 				0169C416238D841300EEBAB5 /* CurrentModeViewController.swift in Sources */,
+				010D911C23E09AAA00AAFCE1 /* SmartSnipe.xcdatamodeld in Sources */,
 				0169C410238D6F5D00EEBAB5 /* TimeBetweenOpeningsViewController.swift in Sources */,
 				0169C422239050E500EEBAB5 /* HistoricalStatsCell.swift in Sources */,
 				0169C41E238E2D0400EEBAB5 /* SSMargins.swift in Sources */,
@@ -593,6 +601,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		010D911A23E09AAA00AAFCE1 /* SmartSnipe.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				010D911B23E09AAA00AAFCE1 /* SessionDataModel.xcdatamodel */,
+			);
+			currentVersion = 010D911B23E09AAA00AAFCE1 /* SessionDataModel.xcdatamodel */;
+			path = SmartSnipe.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 01ACB31023736918003ACBF4 /* Project object */;
 }

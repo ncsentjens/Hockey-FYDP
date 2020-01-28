@@ -102,6 +102,12 @@ class SessionViewController: UIViewController {
     
     @objc private func sessionButtonTapped() {
         if self.viewModel.isSessionInProgress {
+            let sessionViewModel = SessionViewModel(shots: 4,
+                                                    goals: 2,
+                                                    averageShotSpeed: 87.3,
+                                                    averageReactionTime: 1.2,
+                                                    sessionDate: Date())
+            CoreDataManager.sharedManager.saveSessionModel(model: sessionViewModel)
             self.viewModel.isSessionInProgress = false
         } else {
             self.viewModel.sessionStart = Date()

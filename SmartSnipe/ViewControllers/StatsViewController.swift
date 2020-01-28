@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import CoreData
 
 struct StatsViewControllerViewModel {
-    let historicalStats: HistoricalStatsViewModel
-    let recentSessions: [SessionViewModel]
+    var historicalStats: HistoricalStatsViewModel
+    var recentSessions: [SessionViewModel] = []
 }
 
 class StatsViewController: UITableViewController {
@@ -18,19 +19,12 @@ class StatsViewController: UITableViewController {
      
     override init(style: UITableView.Style) {
         
-        let historicalStats = HistoricalStatsViewModel(shotSpeed: 100.0,
-                                                       shots: 100,
-                                                       goals: 10,
-                                                       reactionTime: 0.14)
-        let recentSessions = [
-            SessionViewModel(shots: 10, goals: 4, averageShotSpeed: 100.0, averageReactionTime: 0.14, sessionDate: Date()),
-            SessionViewModel(shots: 11, goals: 8, averageShotSpeed: 80.0, averageReactionTime: 0.14, sessionDate: Date()),
-            SessionViewModel(shots: 45, goals: 8, averageShotSpeed: 68.0, averageReactionTime: 0.14, sessionDate: Date()),
-            SessionViewModel(shots: 19, goals: 12, averageShotSpeed: 100.0, averageReactionTime: 0.3, sessionDate: Date()),
-        
-        ]
+        let historicalStats = HistoricalStatsViewModel(shotSpeed: 0,
+                                                       shots: 0,
+                                                       goals: 0,
+                                                       reactionTime: 0)
         viewModel = StatsViewControllerViewModel(historicalStats: historicalStats,
-                                                 recentSessions: recentSessions)
+                                                 recentSessions: [])
         super.init(style: style)
     }
     
@@ -50,6 +44,54 @@ class StatsViewController: UITableViewController {
         self.tableView.register(HistoricalStatsCell.self, forCellReuseIdentifier: HistoricalStatsCell.reuseIdentifier)
         self.navigationItem.title = "Stats"
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        guard let appDelegate =
+          UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "SessionDataModel")
+        
+        do {
+            let sessionModels = try managedContext.fetch(fetchRequest)
+            let sessionViewModels: [SessionViewModel] = sessionModels.map { sessionModel -> SessionViewModel in
+                let sessionDictionary = sessionModel.dictionaryWithValues(forKeys: ["shots", "goals", "date", "reactionTime", "shotSpeed"])
+                let shots = sessionDictionary["shots"] as! Int
+                let goals = sessionDictionary["goals"] as! Int
+                let date = sessionDictionary["date"] as! Date
+                let reactionTime = sessionDictionary["reactionTime"] as! Float
+                let shotSpeed = sessionDictionary["shotSpeed"] as! Float
+                return SessionViewModel(shots: shots,
+                                        goals: goals,
+                                        averageShotSpeed: shotSpeed,
+                                        averageReactionTime: reactionTime,
+                                        sessionDate: date)
+            }
+            self.viewModel.recentSessions = sessionViewModels
+            
+            let numberOfSessions = sessionViewModels.count
+            var totalGoals: Int = 0
+            var totalShots: Int = 0
+            var averageShotSpeed: Float = 0
+            var averageReactionTime: Float = 0
+            sessionViewModels.forEach { (sessionViewModel) in
+                totalGoals += sessionViewModel.goals
+                totalShots += sessionViewModel.shots
+                averageShotSpeed += sessionViewModel.averageShotSpeed
+                averageReactionTime += sessionViewModel.averageReactionTime
+            }
+            
+            self.viewModel.historicalStats = HistoricalStatsViewModel(shotSpeed: averageShotSpeed/Float(numberOfSessions), shots: totalShots, goals: totalGoals, reactionTime: averageReactionTime/Float(numberOfSessions))
+            self.tableView.reloadData()
+        } catch let error as NSError {
+          print("Could not fetch. \(error), \(error.userInfo)")
+        }
     }
 }
 

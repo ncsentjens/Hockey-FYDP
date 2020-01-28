@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 class RecentSessionCell: UITableViewCell {
     static let cellHeight: CGFloat = 42.0
@@ -79,7 +80,7 @@ class RecentSessionCell: UITableViewCell {
         self.dateLabel.text = sessionMonth + " " + String (sessionDayOfMonth)
         self.goalsLabel.text = String(sessionViewModel.goals)
         self.shotsLabel.text = String(sessionViewModel.shots)
-        self.shotsPercentageLabel.text = String(sessionViewModel.shootingPercentage())
+        self.shotsPercentageLabel.text = String(HistoricalStatsViewModel.shootingPercentage(goals:sessionViewModel.goals, shots: sessionViewModel.shots))
         self.shotSpeedLabel.text = String(sessionViewModel.averageShotSpeed)
         self.reactionTimeLabel.text = String(sessionViewModel.averageReactionTime)
     }
