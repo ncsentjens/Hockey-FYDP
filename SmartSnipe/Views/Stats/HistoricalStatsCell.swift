@@ -16,7 +16,8 @@ struct HistoricalStatsViewModel {
     let reactionTime: Float
     
     static func shootingPercentage(goals: Int, shots: Int) -> Float {
-        return round((Float(goals) / Float(shots) * 10 * 100)) / 10
+        return SSHelper.roundNum(number: Float(goals) / Float(shots) * 100, places: 1)
+//        return round((Float(goals) / Float(shots) * 10 * 100)) / 10
     }
 }
 
@@ -75,7 +76,7 @@ class HistoricalStatsCell: UITableViewCell {
         self.goalsLabel.apply(statName: "G", statValue: String(viewModel.goals))
         self.shotsLabel.apply(statName: "S", statValue: String(viewModel.shots))
         self.shootingPercentageLabel.apply(statName: "S%", statValue: String(HistoricalStatsViewModel.shootingPercentage(goals: viewModel.goals, shots: viewModel.shots)))
-        self.shotsSpeedLabel.apply(statName: "SS", statValue: String(viewModel.shotSpeed))
-        self.reactionTimeLabel.apply(statName: "RT", statValue: String(viewModel.reactionTime))
+        self.shotsSpeedLabel.apply(statName: "SS", statValue: String(SSHelper.roundNum(number: viewModel.shotSpeed, places: 1)))
+        self.reactionTimeLabel.apply(statName: "RT", statValue: String(SSHelper.roundNum(number: viewModel.reactionTime, places: 1)))
     }
 }
