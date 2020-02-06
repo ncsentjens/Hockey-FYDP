@@ -14,7 +14,7 @@ class RecentSessionCell: UITableViewCell {
     static let cellHeight: CGFloat = 42.0
     static let reuseIdentifierName: String = "recent_session_cell"
     
-    static let columnWidth: CGFloat = 46.0
+    static let columnWidth: CGFloat = 38.0
     static let dateWidth: CGFloat = 96.0
     
     private let dateLabel = UILabel()
@@ -23,6 +23,8 @@ class RecentSessionCell: UITableViewCell {
     private let shotsPercentageLabel = UILabel()
     private let shotSpeedLabel = UILabel()
     private let reactionTimeLabel = UILabel()
+    private let fastestShotLabel = UILabel()
+    private let quickestReactionTimeLabel = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -40,7 +42,9 @@ class RecentSessionCell: UITableViewCell {
          self.shotsLabel,
          self.shotsPercentageLabel,
          self.shotSpeedLabel,
-         self.reactionTimeLabel].forEach { label in
+         self.reactionTimeLabel,
+         self.fastestShotLabel,
+         self.quickestReactionTimeLabel].forEach { label in
             label.translatesAutoresizingMaskIntoConstraints = false
             self.contentView.addSubview(label)
             label.textAlignment = .center
@@ -55,13 +59,17 @@ class RecentSessionCell: UITableViewCell {
          self.shotsLabel,
          self.shotsPercentageLabel,
          self.shotSpeedLabel,
-         self.reactionTimeLabel].forEach { label in
+         self.reactionTimeLabel,
+         self.fastestShotLabel,
+         self.quickestReactionTimeLabel].forEach { label in
             NSLayoutConstraint.activate([label.widthAnchor.constraint(equalToConstant: RecentSessionCell.columnWidth)])
         }
         
         NSLayoutConstraint.activate([
             self.dateLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: SSMargins.large),
-            self.reactionTimeLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -SSMargins.large),
+            self.quickestReactionTimeLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -SSMargins.large),
+            self.fastestShotLabel.trailingAnchor.constraint(equalTo: self.quickestReactionTimeLabel.leadingAnchor),
+            self.reactionTimeLabel.trailingAnchor.constraint(equalTo: self.fastestShotLabel.leadingAnchor),
             self.shotSpeedLabel.trailingAnchor.constraint(equalTo: self.reactionTimeLabel.leadingAnchor),
             self.shotsPercentageLabel.trailingAnchor.constraint(equalTo: self.shotSpeedLabel.leadingAnchor),
             self.shotsLabel.trailingAnchor.constraint(equalTo: self.shotsPercentageLabel.leadingAnchor),
@@ -83,5 +91,7 @@ class RecentSessionCell: UITableViewCell {
         self.shotsPercentageLabel.text = String(HistoricalStatsViewModel.shootingPercentage(goals:sessionViewModel.goals, shots: sessionViewModel.shots))
         self.shotSpeedLabel.text = String(sessionViewModel.averageShotSpeed)
         self.reactionTimeLabel.text = String(sessionViewModel.averageReactionTime)
+        self.fastestShotLabel.text = String(sessionViewModel.fastestShot)
+        self.quickestReactionTimeLabel.text = String(sessionViewModel.quickestReactionTime)
     }
 }

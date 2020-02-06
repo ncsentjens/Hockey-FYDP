@@ -14,6 +14,8 @@ struct SessionViewModel {
     var goals: Int
     var averageShotSpeed: Float
     var averageReactionTime: Float
+    var fastestShot: Float
+    var quickestReactionTime:Float
     var sessionDate: Date
     
     func shootingPercentage() -> Float {
@@ -24,9 +26,13 @@ struct SessionViewModel {
 class CurrentSessionCell: UITableViewCell {
     let descriptionLabel = UILabel()
     let stackView = UIStackView()
+    let goalsLabel = LeftRightLabel()
+    let shotsLabel = LeftRightLabel()
     let accuracyLabel = LeftRightLabel()
     let shotSpeedLabel = LeftRightLabel()
     let reactionTimeLabel = LeftRightLabel()
+    let fastestShotLabel = LeftRightLabel()
+    let quickestReactionTimeLabel = LeftRightLabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -62,7 +68,7 @@ class CurrentSessionCell: UITableViewCell {
             self.contentView.addSubview($0)
         }
         
-        [self.accuracyLabel, self.shotSpeedLabel, self.reactionTimeLabel].forEach {
+        [self.goalsLabel, self.shotsLabel, self.accuracyLabel, self.shotSpeedLabel, self.reactionTimeLabel, self.fastestShotLabel, self.quickestReactionTimeLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             self.addSeparator()
             self.stackView.addArrangedSubview($0)
@@ -83,6 +89,12 @@ class CurrentSessionCell: UITableViewCell {
     }
     
     func applyViewModel(viewModel: SessionViewModel) {
+        // Goals Label
+        self.goalsLabel.set(leftText: "Goals", rightText: String(viewModel.goals))
+        
+        // Shots Label
+        self.shotsLabel.set(leftText: "Shots", rightText: String(viewModel.shots))
+        
         // Accuracy Label
         let shootingPercentage: Float
         if (viewModel.shots == 0) {
@@ -100,5 +112,12 @@ class CurrentSessionCell: UITableViewCell {
         // Reaction time label
         let reactionTimeText = String(viewModel.averageReactionTime) + " s"
         self.reactionTimeLabel.set(leftText: "Average Reaction Time", rightText: reactionTimeText)
+        
+        // Fastest shot label
+        let fastestShotText = String(viewModel.fastestShot) + " mph"
+        self.fastestShotLabel.set(leftText: "Fastest Shot", rightText: fastestShotText)
+        
+        // Quicket reaction time label
+        self.quickestReactionTimeLabel.set(leftText: "Quickest Reaction Time", rightText: String(viewModel.quickestReactionTime) + " s")
     }
 }

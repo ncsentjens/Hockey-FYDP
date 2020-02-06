@@ -29,6 +29,8 @@ class SessionViewController: UIViewController {
                                                 goals: 4,
                                                 averageShotSpeed: 67.9,
                                                 averageReactionTime: 0.43,
+                                                fastestShot: 84.2,
+                                                quickestReactionTime: 0.40,
                                                 sessionDate: Date())
         self.viewModel = SessionViewControllerViewModel(isNetConnected: true,
                                                         isSessionInProgress: false,
@@ -106,6 +108,8 @@ class SessionViewController: UIViewController {
                                                     goals: 2,
                                                     averageShotSpeed: 87.3,
                                                     averageReactionTime: 1.2,
+                                                    fastestShot: 89.0,
+                                                    quickestReactionTime: 0.8,
                                                     sessionDate: Date())
             CoreDataManager.sharedManager.saveSessionModel(model: sessionViewModel)
             self.viewModel.isSessionInProgress = false
@@ -131,7 +135,7 @@ extension SessionViewController: UITableViewDelegate, UITableViewDataSource {
         case 1:
             return 280
         case 2:
-            return 178
+            return 346
         default:
             return 80
         }

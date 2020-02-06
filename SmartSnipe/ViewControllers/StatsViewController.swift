@@ -16,6 +16,7 @@ struct StatsViewControllerViewModel {
 
 class StatsViewController: UITableViewController {
     private var viewModel: StatsViewControllerViewModel
+    private let bluetoothManager = SSBluetoothManager.sharedManager
      
     override init(style: UITableView.Style) {
         
@@ -61,16 +62,20 @@ class StatsViewController: UITableViewController {
         do {
             let sessionModels = try managedContext.fetch(fetchRequest)
             let sessionViewModels: [SessionViewModel] = sessionModels.map { sessionModel -> SessionViewModel in
-                let sessionDictionary = sessionModel.dictionaryWithValues(forKeys: ["shots", "goals", "date", "reactionTime", "shotSpeed"])
+                let sessionDictionary = sessionModel.dictionaryWithValues(forKeys: ["shots", "goals", "date", "reactionTime", "shotSpeed", "fastestShot", "quickestReactionTime"])
                 let shots = sessionDictionary["shots"] as! Int
                 let goals = sessionDictionary["goals"] as! Int
                 let date = sessionDictionary["date"] as! Date
                 let reactionTime = sessionDictionary["reactionTime"] as! Float
                 let shotSpeed = sessionDictionary["shotSpeed"] as! Float
+                let fastestShot = sessionDictionary["fastestShot"] as! Float
+                let quickestReactionTime = sessionDictionary["quickestReactionTime"] as! Float
                 return SessionViewModel(shots: shots,
                                         goals: goals,
                                         averageShotSpeed: shotSpeed,
                                         averageReactionTime: reactionTime,
+                                        fastestShot: fastestShot,
+                                        quickestReactionTime: quickestReactionTime,
                                         sessionDate: date)
             }
             self.viewModel.recentSessions = sessionViewModels
@@ -97,7 +102,7 @@ class StatsViewController: UITableViewController {
 
 extension StatsViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 2
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -106,8 +111,6 @@ extension StatsViewController {
             return 1
         case 1:
             return self.viewModel.recentSessions.count > 0 ? self.viewModel.recentSessions.count + 1 : 0
-        case 2:
-            return 0
         default:
             fatalError("Unknown section")
         }
@@ -123,8 +126,6 @@ extension StatsViewController {
             } else {
                 return RecentSessionCell.cellHeight
             }
-        case 2:
-            return 0
         default:
             fatalError("Unknown section")
         }
@@ -145,8 +146,6 @@ extension StatsViewController {
             header.textLabel?.text = "Historical"
         case 1:
             header.textLabel?.text = "Recent Sessions"
-        case 2:
-            header.textLabel?.text = "Progress"
         default:
             fatalError("Unknown section")
         }
@@ -176,8 +175,6 @@ extension StatsViewController {
                                   backgroundColor: indexPath.row % 2 == 0 ? SSColors.lightGray : SSColors.platinum)
                 return cell
             }
-        case 2:
-            return UITableViewCell()
         default:
             fatalError("Unknown section")
         }

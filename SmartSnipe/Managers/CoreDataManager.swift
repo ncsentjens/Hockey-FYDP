@@ -13,6 +13,25 @@ import UIKit
 class CoreDataManager {
     static let sharedManager = CoreDataManager()
     
+    func deleteAllSessionModels() {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+          return
+        }
+        
+        let context = appDelegate.persistentContainer.viewContext
+        let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "SessionDataModel")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
+        do
+        {
+            try context.execute(deleteRequest)
+            try context.save()
+        }
+        catch
+        {
+            print ("There was an error")
+        }
+    }
+    
     func saveSessionModel(model: SessionViewModel) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
           return
@@ -31,6 +50,8 @@ class CoreDataManager {
         session.setValue(model.averageShotSpeed, forKeyPath: "shotSpeed")
         session.setValue(model.sessionDate, forKeyPath: "date")
         session.setValue(model.averageReactionTime, forKeyPath: "reactionTime")
+        session.setValue(model.fastestShot, forKey: "fastestShot")
+        session.setValue(model.quickestReactionTime, forKey: "quickestReactionTime")
         
         do {
           try managedContext.save()

@@ -16,6 +16,7 @@ class SSBluetoothManager: NSObject {
     
     private let centralManager: CBCentralManager
     private var smartSnipePeripheral: CBPeripheral?
+    private var transmitCharacteristic: CBCharacteristic?
     
     override init() {
         centralManager = CBCentralManager(delegate: nil, queue: nil, options: nil)
@@ -23,6 +24,25 @@ class SSBluetoothManager: NSObject {
         self.centralManager.delegate = self
         self.centralManager.scanForPeripherals(withServices: nil, options: nil)
         
+    }
+    
+    func writeData(settingsViewModel: SettingsViewModel) {
+        guard let smartSnipePeripheral = self.smartSnipePeripheral, let transmitCharacteristic = self.transmitCharacteristic else { return }
+
+        let jsonDictionary: [String: Any] = [
+            "time_between_openings": settingsViewModel.timeBetweenOpenings,
+            "time_slot_is_open": settingsViewModel.timeSlotIsOpen,
+            "number_of_slots_that_open": settingsViewModel.numberOfSlotsThatOpen,
+            "current_mode": settingsViewModel.currentMode.rawValue
+        ]
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: jsonDictionary, options: JSONSerialization.WritingOptions()) as Data
+            smartSnipePeripheral.writeValue(jsonData, for: transmitCharacteristic, type: CBCharacteristicWriteType.withResponse)
+        } catch  {
+            print("JSON Error")
+        }
+        
+       
     }
 }
 
@@ -52,7 +72,7 @@ extension SSBluetoothManager: CBPeripheralDelegate {
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         guard let peripheralServices = peripheral.services else { return }
         for service in peripheralServices {
-            // Look for services we care about
+            // Look for services we care about, should be one service with tx and rx
             if (true) {
                 peripheral.discoverCharacteristics(nil, for: service)
             }
