@@ -20,10 +20,12 @@ class StatsViewController: UITableViewController {
      
     override init(style: UITableView.Style) {
         
-        let historicalStats = HistoricalStatsViewModel(shotSpeed: 0,
+        let historicalStats = HistoricalStatsViewModel(shotSpeed: 1,
                                                        shots: 0,
-                                                       goals: 0,
-                                                       reactionTime: 0)
+                                                       goals: 1,
+                                                       reactionTime: 1,
+                                                       fastestShot: 1,
+                                                       quickestReactionTime: 1)
         viewModel = StatsViewControllerViewModel(historicalStats: historicalStats,
                                                  recentSessions: [])
         super.init(style: style)
@@ -85,14 +87,29 @@ class StatsViewController: UITableViewController {
             var totalShots: Int = 0
             var averageShotSpeed: Float = 0
             var averageReactionTime: Float = 0
+            var fastestShot: Float = 0.0
+            var quickestReactionTime: Float = 10.0
             sessionViewModels.forEach { (sessionViewModel) in
                 totalGoals += sessionViewModel.goals
                 totalShots += sessionViewModel.shots
                 averageShotSpeed += sessionViewModel.averageShotSpeed
                 averageReactionTime += sessionViewModel.averageReactionTime
+                if sessionViewModel.fastestShot > fastestShot {
+                    fastestShot = sessionViewModel.fastestShot
+                }
+                if (sessionViewModel.quickestReactionTime < quickestReactionTime) {
+                    quickestReactionTime = sessionViewModel.quickestReactionTime
+                }
             }
             
-            self.viewModel.historicalStats = HistoricalStatsViewModel(shotSpeed: averageShotSpeed/Float(numberOfSessions), shots: totalShots, goals: totalGoals, reactionTime: averageReactionTime/Float(numberOfSessions))
+            self.viewModel.historicalStats = HistoricalStatsViewModel(
+                shotSpeed: averageShotSpeed/Float(numberOfSessions),
+                shots: totalShots,
+                goals: totalGoals,
+                reactionTime: averageReactionTime/Float(numberOfSessions),
+                fastestShot: fastestShot,
+                quickestReactionTime: quickestReactionTime
+            )
             self.tableView.reloadData()
         } catch let error as NSError {
           print("Could not fetch. \(error), \(error.userInfo)")

@@ -17,13 +17,13 @@ class SSBluetoothManager: NSObject {
     private let centralManager: CBCentralManager
     private var smartSnipePeripheral: CBPeripheral?
     private var transmitCharacteristic: CBCharacteristic?
+    let heartDeviceInformationService = CBUUID(string: "180A")
     
     override init() {
-        centralManager = CBCentralManager(delegate: nil, queue: nil, options: nil)
+        centralManager = CBCentralManager(delegate: nil, queue: DispatchQueue.main, options: nil)
         super.init()
-        self.centralManager.delegate = self
-        self.centralManager.scanForPeripherals(withServices: nil, options: nil)
-        
+        centralManager.delegate = self
+        self.centralManager.scanForPeripherals(withServices: [heartDeviceInformationService], options: nil)
     }
     
     func writeData(settingsViewModel: SettingsViewModel) {
@@ -41,21 +41,19 @@ class SSBluetoothManager: NSObject {
         } catch  {
             print("JSON Error")
         }
-        
-       
     }
 }
 
 extension SSBluetoothManager: CBCentralManagerDelegate {
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         if (central.state == CBManagerState.poweredOn) {
-            
+            centralManager.scanForPeripherals(withServices: nil, options: nil)
         }
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         // if discovers hockey net peripheral, keep reference and stop scanning
-        if (true) {
+        if (peripheral.name == "Blood Pressure" || advertisementData["kCBAdvDataLocalName"] as? String == "Blood Pressure") {
             self.smartSnipePeripheral = peripheral
             self.centralManager.stopScan()
             self.centralManager.connect(peripheral, options: nil)
@@ -73,7 +71,8 @@ extension SSBluetoothManager: CBPeripheralDelegate {
         guard let peripheralServices = peripheral.services else { return }
         for service in peripheralServices {
             // Look for services we care about, should be one service with tx and rx
-            if (true) {
+            // Blood pressure service
+            if (service.uuid.uuidString == "1810") {
                 peripheral.discoverCharacteristics(nil, for: service)
             }
         }
@@ -83,7 +82,7 @@ extension SSBluetoothManager: CBPeripheralDelegate {
         guard let serviceCharacteristics = service.characteristics else { return }
         for characteristic in serviceCharacteristics {
             // Characteristic we care about
-            if (true) {
+            if (characteristic.uuid.uuidString == "2A36") {
                 // reading is good but can get notied as well
                 peripheral.readValue(for: characteristic)
                 peripheral.setNotifyValue(true, for: characteristic)
@@ -94,6 +93,11 @@ extension SSBluetoothManager: CBPeripheralDelegate {
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         guard let data = characteristic.value else { return }
         // parse data
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
+        guard let error = error else { return }
+        print("error")
     }
     
     func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {

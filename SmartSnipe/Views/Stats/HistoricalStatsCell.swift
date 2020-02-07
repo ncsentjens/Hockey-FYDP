@@ -14,6 +14,8 @@ struct HistoricalStatsViewModel {
     let shots: Int
     let goals: Int
     let reactionTime: Float
+    let fastestShot: Float
+    let quickestReactionTime: Float
     
     static func shootingPercentage(goals: Int, shots: Int) -> Float {
         return SSHelper.roundNum(number: Float(goals) / Float(shots) * 100, places: 1)
@@ -32,6 +34,8 @@ class HistoricalStatsCell: UITableViewCell {
     private let shootingPercentageLabel: StatsLabelView
     private let shotsSpeedLabel: StatsLabelView
     private let reactionTimeLabel: StatsLabelView
+    private let hardestShotLabel: StatsLabelView
+    private let quickestReactionTime: StatsLabelView
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         goalsLabel = StatsLabelView(frame: .zero)
@@ -39,6 +43,8 @@ class HistoricalStatsCell: UITableViewCell {
         shootingPercentageLabel = StatsLabelView(frame: .zero)
         shotsSpeedLabel = StatsLabelView(frame: .zero)
         reactionTimeLabel = StatsLabelView(frame: .zero)
+        hardestShotLabel = StatsLabelView(frame: .zero)
+        quickestReactionTime = StatsLabelView(frame: .zero)
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.constructCell()
     }
@@ -50,7 +56,7 @@ class HistoricalStatsCell: UITableViewCell {
     private func constructCell() {
         self.contentView.addSubview(self.stackView)
         self.contentView.backgroundColor = SSColors.jet
-        [self.goalsLabel, self.shotsLabel, self.shootingPercentageLabel, self.shotsSpeedLabel, self.reactionTimeLabel].forEach { label in
+        [self.goalsLabel, self.shotsLabel, self.shootingPercentageLabel, self.shotsSpeedLabel, self.reactionTimeLabel, self.hardestShotLabel, self.quickestReactionTime].forEach { label in
             label.translatesAutoresizingMaskIntoConstraints = false
             self.stackView.addArrangedSubview(label)
             NSLayoutConstraint.activate([
@@ -78,5 +84,7 @@ class HistoricalStatsCell: UITableViewCell {
         self.shootingPercentageLabel.apply(statName: "S%", statValue: String(HistoricalStatsViewModel.shootingPercentage(goals: viewModel.goals, shots: viewModel.shots)))
         self.shotsSpeedLabel.apply(statName: "SS", statValue: String(SSHelper.roundNum(number: viewModel.shotSpeed, places: 1)))
         self.reactionTimeLabel.apply(statName: "RT", statValue: String(SSHelper.roundNum(number: viewModel.reactionTime, places: 1)))
+        self.hardestShotLabel.apply(statName: "HS", statValue: String(viewModel.fastestShot))
+        self.quickestReactionTime.apply(statName: "QR", statValue: String(viewModel.quickestReactionTime))
     }
 }
