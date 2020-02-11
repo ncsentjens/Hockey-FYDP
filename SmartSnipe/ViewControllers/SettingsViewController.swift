@@ -177,6 +177,7 @@ extension SettingsViewController: TimeSlotsOpenDelegate {
     func timeSlotsOpenUpdated(_ timeOpen: Float) {
         self.settingsViewModel.timeSlotIsOpen = timeOpen
         self.tableView.reloadData()
+        SSBluetoothManager.sharedManager.writeData(settingsViewModel: self.settingsViewModel)
     }
 }
 
@@ -184,6 +185,7 @@ extension SettingsViewController: NumberOfSlotsThatOpenDelegate {
     func numberOfSlotsThatOpenUpdated(_ numberOfSlots: Int) {
         self.settingsViewModel.numberOfSlotsThatOpen = numberOfSlots
         self.tableView.reloadData()
+        SSBluetoothManager.sharedManager.writeData(settingsViewModel: self.settingsViewModel)
     }
 }
 
@@ -191,5 +193,6 @@ extension SettingsViewController: CurrentModeDelegate {
     func currentModeUpdated(_ currentMode: String) {
         self.settingsViewModel.currentMode = ShootingMode(rawValue: currentMode) ?? .allCorners
         self.tableView.reloadData()
+        SSBluetoothManager.sharedManager.writeData(settingsViewModel: self.settingsViewModel)
     }
 }

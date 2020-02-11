@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum HockeyNetHole {
+enum HockeyNetHole: String {
     case topLeft
     case topRight
     case bottomLeft

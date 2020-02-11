@@ -51,7 +51,6 @@ class SessionViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : SSColors.grainYellow]
         self.navigationController?.navigationBar.barTintColor = SSColors.raisinBlack
         
-        
         self.sessionButton.setTitle("End Session", for: .selected)
         self.sessionButton.setTitleColor(.red, for: .selected)
         self.sessionButton.backgroundColor = SSColors.grainYellow
@@ -71,6 +70,8 @@ class SessionViewController: UIViewController {
         self.tableView.register(CurrentSessionCell.self, forCellReuseIdentifier: "current_session_cell")
         
         self.setupConstraints()
+        
+        SSBluetoothManager.sharedManager.sessionDelegate = self
         
         super.viewDidLoad()
     }
@@ -104,19 +105,14 @@ class SessionViewController: UIViewController {
     
     @objc private func sessionButtonTapped() {
         if self.viewModel.isSessionInProgress {
-            let sessionViewModel = SessionViewModel(shots: 4,
-                                                    goals: 2,
-                                                    averageShotSpeed: 87.3,
-                                                    averageReactionTime: 1.2,
-                                                    fastestShot: 89.0,
-                                                    quickestReactionTime: 0.8,
-                                                    sessionDate: Date())
-            CoreDataManager.sharedManager.saveSessionModel(model: sessionViewModel)
+            CoreDataManager.sharedManager.saveSessionModel(model: self.viewModel.sessionViewModel)
             self.viewModel.isSessionInProgress = false
+            SSBluetoothManager.sharedManager.endSession()
         } else {
             self.viewModel.sessionStart = Date()
             
             self.viewModel.isSessionInProgress = true
+            SSBluetoothManager.sharedManager.startSession()
         }
         self.updateSessionButton()
         self.tableView.reloadData()
@@ -179,6 +175,13 @@ extension SessionViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension SessionViewController: HockeyNetDelegate {
     func holeWasSelected(hole: HockeyNetHole) {
-        
+        SSBluetoothManager.sharedManager.writeData(hole: hole)
+    }
+}
+
+extension SessionViewController: SessionDelegate {
+    func didUpdateSessionModel(sessionViewModel: SessionViewModel) {
+        self.viewModel.sessionViewModel = sessionViewModel
+        self.tableView.reloadData()
     }
 }
