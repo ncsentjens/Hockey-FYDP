@@ -136,7 +136,7 @@ extension SettingsViewController {
             let viewModel = EditSettingsViewModel(
                 navigationTitleText: "Time Between Openings",
                 descriptionText: "Edit the number of seconds between slot openings.",
-                pickerValues: ["0.5", "1.0", "1.5", "2.0", "2.5", "3.0", "3.5", "4.0", "4.5", "5.0"],
+                pickerValues: ["0.5", "1.0", "1.5", "2.0", "2.5", "3.0", "3.5", "4.0", "4.5", "5.0", "5.5", "6.0", "6.5", "7.0"],
                 selectedPickerValue: String(self.settingsViewModel.timeBetweenOpenings))
             let timeBetweenOpenings = TimeBetweenOpeningsViewController(viewModel: viewModel)
             timeBetweenOpenings.delegate = self
@@ -145,7 +145,7 @@ extension SettingsViewController {
             let viewModel = EditSettingsViewModel(
                 navigationTitleText: "Time Slot is Open",
                 descriptionText: "Edit the number of seconds the slot is open.",
-                pickerValues: ["0.5", "1.0", "1.5", "2.0", "2.5"],
+                pickerValues: ["0.5", "1.0", "1.5", "2.0", "2.5", "3.0"],
                 selectedPickerValue: String(self.settingsViewModel.timeSlotIsOpen))
             let timeSlotsOpen = TimeSlotsOpenViewController(viewModel: viewModel)
             timeSlotsOpen.delegate = self
