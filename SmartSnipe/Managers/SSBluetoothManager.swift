@@ -21,70 +21,58 @@ class SSBluetoothManager: NSObject {
     private let centralManager: CBCentralManager
     private var smartSnipePeripheral: CBPeripheral?
     private var transmitCharacteristic: CBCharacteristic?
-    let heartDeviceInformationService = CBUUID(string: "180A")
+    private var receiveCharacteristic: CBCharacteristic?
+    
     weak var sessionDelegate: SessionDelegate?
     
     override init() {
         centralManager = CBCentralManager(delegate: nil, queue: DispatchQueue.main, options: nil)
         super.init()
         centralManager.delegate = self
-        self.centralManager.scanForPeripherals(withServices: [heartDeviceInformationService], options: nil)
+        self.centralManager.scanForPeripherals(withServices: nil, options: nil)
     }
     
     func startSession() {
-        guard let smartSnipePeripheral = self.smartSnipePeripheral, let transmitCharacteristic = self.transmitCharacteristic else { return }
         let jsonDictionary: [String: Any] = [
             "session_in_progress": true
         ]
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: jsonDictionary, options: JSONSerialization.WritingOptions()) as Data
-            smartSnipePeripheral.writeValue(jsonData, for: transmitCharacteristic, type: CBCharacteristicWriteType.withResponse)
-        } catch  {
-            print("JSON Error")
-        }
+        guard let smartSnipePeripheral = self.smartSnipePeripheral,
+            let receiveCharacteristic = self.receiveCharacteristic,
+            let jsonData = try? JSONSerialization.data(withJSONObject: jsonDictionary,
+                                                       options: JSONSerialization.WritingOptions()) else { return }
+
+        smartSnipePeripheral.writeValue(jsonData, for: receiveCharacteristic, type: .withResponse)
     }
     
     func endSession() {
-        guard let smartSnipePeripheral = self.smartSnipePeripheral, let transmitCharacteristic = self.transmitCharacteristic else { return }
         let jsonDictionary: [String: Any] = [
             "session_in_progress": false
         ]
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: jsonDictionary, options: JSONSerialization.WritingOptions()) as Data
-            smartSnipePeripheral.writeValue(jsonData, for: transmitCharacteristic, type: CBCharacteristicWriteType.withResponse)
-        } catch  {
-            print("JSON Error")
-        }
+        guard let smartSnipePeripheral = self.smartSnipePeripheral,
+            let receiveCharacteristic = self.receiveCharacteristic,
+            let jsonData = try? JSONSerialization.data(withJSONObject: jsonDictionary, options: JSONSerialization.WritingOptions()) else { return }
+
+        smartSnipePeripheral.writeValue(jsonData, for: receiveCharacteristic, type: .withResponse)
     }
     
-    func writeData(hole: HockeyNetHole) {
-        guard let smartSnipePeripheral = self.smartSnipePeripheral, let transmitCharacteristic = self.transmitCharacteristic else { return }
+    func updateNextHole(hole: HockeyNetHole) {
         let jsonDictionary: [String: Any] = [
             "hole_to_open": hole.rawValue
         ]
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: jsonDictionary, options: JSONSerialization.WritingOptions()) as Data
-            smartSnipePeripheral.writeValue(jsonData, for: transmitCharacteristic, type: CBCharacteristicWriteType.withResponse)
-        } catch  {
-            print("JSON Error")
-        }
+        guard let smartSnipePeripheral = self.smartSnipePeripheral,
+            let receiveCharacteristic = self.receiveCharacteristic,
+            let holeJSONData = try? JSONSerialization.data(withJSONObject: jsonDictionary,
+                                                           options: JSONSerialization.WritingOptions()) else { return }
+        
+        smartSnipePeripheral.writeValue(holeJSONData, for: receiveCharacteristic, type: .withResponse)
     }
     
-    func writeData(settingsViewModel: SettingsViewModel) {
-        guard let smartSnipePeripheral = self.smartSnipePeripheral, let transmitCharacteristic = self.transmitCharacteristic else { return }
-
-        let jsonDictionary: [String: Any] = [
-            "time_between_openings": settingsViewModel.timeBetweenOpenings,
-            "time_slot_is_open": settingsViewModel.timeSlotIsOpen,
-            "number_of_slots_that_open": settingsViewModel.numberOfSlotsThatOpen,
-            "current_mode": settingsViewModel.currentMode.rawValue
-        ]
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: jsonDictionary, options: JSONSerialization.WritingOptions()) as Data
-            smartSnipePeripheral.writeValue(jsonData, for: transmitCharacteristic, type: CBCharacteristicWriteType.withResponse)
-        } catch  {
-            print("JSON Error")
-        }
+    func updateSettings(settingsViewModel: SettingsViewModel) {
+        guard let smartSnipePeripheral = self.smartSnipePeripheral,
+            let receiveCharacteristic = self.receiveCharacteristic,
+            let settingsJSON = try? JSONEncoder().encode(settingsViewModel) else { return }
+        smartSnipePeripheral.writeValue(settingsJSON,
+                                        for: receiveCharacteristic, type: CBCharacteristicWriteType.withResponse)
     }
 }
 
@@ -97,10 +85,12 @@ extension SSBluetoothManager: CBCentralManagerDelegate {
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         // if discovers hockey net peripheral, keep reference and stop scanning
-        if (peripheral.name == "Blood Pressure" || advertisementData["kCBAdvDataLocalName"] as? String == "Blood Pressure") {
+        if (peripheral.name == "OBC-UART" || peripheral.name == "obc") {
             self.smartSnipePeripheral = peripheral
             self.centralManager.stopScan()
             self.centralManager.connect(peripheral, options: nil)
+            peripheral.delegate = self
+            peripheral.discoverServices(nil)
         }
     }
     
@@ -114,20 +104,19 @@ extension SSBluetoothManager: CBPeripheralDelegate {
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         guard let peripheralServices = peripheral.services else { return }
         for service in peripheralServices {
-            // Look for services we care about, should be one service with tx and rx
-            // Blood pressure service
-            if (service.uuid.uuidString == "1810") {
-                peripheral.discoverCharacteristics(nil, for: service)
-            }
+            peripheral.discoverCharacteristics(nil, for: service)
         }
     }
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         guard let serviceCharacteristics = service.characteristics else { return }
         for characteristic in serviceCharacteristics {
-            // Characteristic we care about
-            if (characteristic.uuid.uuidString == "2A36") {
-                // reading is good but can get notied as well
+            if (characteristic.uuid.uuidString == "6E400002-B5A3-F393-E0A9-E50E24DCCA9E") {
+                // receive characteristic
+                self.receiveCharacteristic = characteristic
+            } else if (characteristic.uuid.uuidString == "6E400003-B5A3-F393-E0A9-E50E24DCCA9E") {
+                // transmit char
+                self.transmitCharacteristic = characteristic
                 peripheral.readValue(for: characteristic)
                 peripheral.setNotifyValue(true, for: characteristic)
             }
@@ -135,33 +124,14 @@ extension SSBluetoothManager: CBPeripheralDelegate {
     }
     
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        guard let data = characteristic.value else { return }
-        // parse data
-        do {
-            let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String : Any]
-            guard let sessionData = json else { return }
-            let shots = sessionData["shots"] as! Int
-            let goals = sessionData["goals"] as! Int
-            let averageShotSpeed = sessionData["average_shot_speed"] as! Float
-            let averageReactionTime = sessionData["average_reaction_time"] as! Float
-            let fastestShot = sessionData["fastest_shot"] as! Float
-            let quickestReactionTime = sessionData["quickest_reaction_time"] as! Float
-            let sessionViewModel = SessionViewModel(shots: shots,
-                                                    goals: goals,
-                                                    averageShotSpeed: averageShotSpeed,
-                                                    averageReactionTime: averageReactionTime,
-                                                    fastestShot: fastestShot,
-                                                    quickestReactionTime: quickestReactionTime,
-                                                    sessionDate: Date())
-            SSBluetoothManager.sharedManager.sessionDelegate?.didUpdateSessionModel(sessionViewModel: sessionViewModel)
-        } catch {
-            print("error")
-        }
+        let decoder = JSONDecoder()
+        guard let data = characteristic.value,
+            let sessionModel = try? decoder.decode(SessionViewModel.self, from: data) else { return }
+        sessionDelegate?.didUpdateSessionModel(sessionViewModel: sessionModel)
     }
     
     func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
-        guard let error = error else { return }
-        print("error")
+        
     }
     
     func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {

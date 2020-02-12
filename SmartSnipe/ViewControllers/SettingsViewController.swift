@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct SettingsViewModel {
+struct SettingsViewModel: Codable {
     // Time in seconds between opening
     var timeBetweenOpenings: Float
     // Time in seconds that slot is open for
@@ -17,6 +17,14 @@ struct SettingsViewModel {
     var numberOfSlotsThatOpen: Int
     // Net shooting mode
     var currentMode: ShootingMode
+    
+    enum CodingKeys: String, CodingKey {
+        case timeBetweenOpenings = "time_between_openings"
+        case timeSlotIsOpen = "time_slot_is_open"
+        case numberOfSlotsThatOpen = "number_of_slots_that_open"
+        case currentMode = "current_mode"
+    }
+    
 }
 
 protocol NumberOfSlotsThatOpenDelegate: class {
@@ -177,7 +185,7 @@ extension SettingsViewController: TimeSlotsOpenDelegate {
     func timeSlotsOpenUpdated(_ timeOpen: Float) {
         self.settingsViewModel.timeSlotIsOpen = timeOpen
         self.tableView.reloadData()
-        SSBluetoothManager.sharedManager.writeData(settingsViewModel: self.settingsViewModel)
+        SSBluetoothManager.sharedManager.updateSettings(settingsViewModel: self.settingsViewModel)
     }
 }
 
@@ -185,7 +193,7 @@ extension SettingsViewController: NumberOfSlotsThatOpenDelegate {
     func numberOfSlotsThatOpenUpdated(_ numberOfSlots: Int) {
         self.settingsViewModel.numberOfSlotsThatOpen = numberOfSlots
         self.tableView.reloadData()
-        SSBluetoothManager.sharedManager.writeData(settingsViewModel: self.settingsViewModel)
+        SSBluetoothManager.sharedManager.updateSettings(settingsViewModel: self.settingsViewModel)
     }
 }
 
@@ -193,6 +201,6 @@ extension SettingsViewController: CurrentModeDelegate {
     func currentModeUpdated(_ currentMode: String) {
         self.settingsViewModel.currentMode = ShootingMode(rawValue: currentMode) ?? .allCorners
         self.tableView.reloadData()
-        SSBluetoothManager.sharedManager.writeData(settingsViewModel: self.settingsViewModel)
+        SSBluetoothManager.sharedManager.updateSettings(settingsViewModel: self.settingsViewModel)
     }
 }

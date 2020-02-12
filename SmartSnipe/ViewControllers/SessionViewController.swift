@@ -105,7 +105,7 @@ class SessionViewController: UIViewController {
     
     @objc private func sessionButtonTapped() {
         if self.viewModel.isSessionInProgress {
-            CoreDataManager.sharedManager.saveSessionModel(model: self.viewModel.sessionViewModel)
+            CoreDataManager.saveSessionModel(model: self.viewModel.sessionViewModel)
             self.viewModel.isSessionInProgress = false
             SSBluetoothManager.sharedManager.endSession()
         } else {
@@ -175,7 +175,7 @@ extension SessionViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension SessionViewController: HockeyNetDelegate {
     func holeWasSelected(hole: HockeyNetHole) {
-        SSBluetoothManager.sharedManager.writeData(hole: hole)
+        SSBluetoothManager.sharedManager.updateNextHole(hole: hole)
     }
 }
 

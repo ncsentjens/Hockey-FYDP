@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window?.rootViewController = tabBarController
         
-//        CoreDataManager.sharedManager.deleteAllSessionModels()
+//        CoreDataManager.deleteAllSessionModels()
         
         // Override point for customization after application launch.
         return true

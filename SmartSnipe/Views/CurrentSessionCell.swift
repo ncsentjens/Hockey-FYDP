@@ -9,14 +9,23 @@
 import Foundation
 import UIKit
 
-struct SessionViewModel {
+struct SessionViewModel: Codable {
     var shots: Int
     var goals: Int
     var averageShotSpeed: Float
     var averageReactionTime: Float
     var fastestShot: Float
     var quickestReactionTime:Float
-    var sessionDate: Date
+    var sessionDate: Date = Date()
+    
+    enum CodingKeys: String, CodingKey {
+        case shots
+        case goals
+        case averageShotSpeed = "average_shot_speed"
+        case averageReactionTime = "average_reaction_time"
+        case fastestShot = "fastest_shot"
+        case quickestReactionTime = "quickest_reaction_time"
+    }
     
     func shootingPercentage() -> Float {
         return round((Float(self.goals) / Float(self.shots) * 10 * 100)) / 10

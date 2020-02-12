@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-enum ShootingMode: String {
+enum ShootingMode: String, Codable {
     case allCorners = "All Corners"
     case topCorners = "Top Corners"
 }

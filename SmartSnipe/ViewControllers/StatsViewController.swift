@@ -52,68 +52,10 @@ class StatsViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        guard let appDelegate =
-          UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
-        
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "SessionDataModel")
-        
-        do {
-            let sessionModels = try managedContext.fetch(fetchRequest)
-            let sessionViewModels: [SessionViewModel] = sessionModels.map { sessionModel -> SessionViewModel in
-                let sessionDictionary = sessionModel.dictionaryWithValues(forKeys: ["shots", "goals", "date", "reactionTime", "shotSpeed", "fastestShot", "quickestReactionTime"])
-                let shots = sessionDictionary["shots"] as! Int
-                let goals = sessionDictionary["goals"] as! Int
-                let date = sessionDictionary["date"] as! Date
-                let reactionTime = sessionDictionary["reactionTime"] as! Float
-                let shotSpeed = sessionDictionary["shotSpeed"] as! Float
-                let fastestShot = sessionDictionary["fastestShot"] as! Float
-                let quickestReactionTime = sessionDictionary["quickestReactionTime"] as! Float
-                return SessionViewModel(shots: shots,
-                                        goals: goals,
-                                        averageShotSpeed: shotSpeed,
-                                        averageReactionTime: reactionTime,
-                                        fastestShot: fastestShot,
-                                        quickestReactionTime: quickestReactionTime,
-                                        sessionDate: date)
-            }
-            self.viewModel.recentSessions = sessionViewModels
-            
-            let numberOfSessions = sessionViewModels.count
-            var totalGoals: Int = 0
-            var totalShots: Int = 0
-            var averageShotSpeed: Float = 0
-            var averageReactionTime: Float = 0
-            var fastestShot: Float = 0.0
-            var quickestReactionTime: Float = 10.0
-            sessionViewModels.forEach { (sessionViewModel) in
-                totalGoals += sessionViewModel.goals
-                totalShots += sessionViewModel.shots
-                averageShotSpeed += sessionViewModel.averageShotSpeed
-                averageReactionTime += sessionViewModel.averageReactionTime
-                if sessionViewModel.fastestShot > fastestShot {
-                    fastestShot = sessionViewModel.fastestShot
-                }
-                if (sessionViewModel.quickestReactionTime < quickestReactionTime) {
-                    quickestReactionTime = sessionViewModel.quickestReactionTime
-                }
-            }
-            
-            self.viewModel.historicalStats = HistoricalStatsViewModel(
-                shotSpeed: averageShotSpeed/Float(numberOfSessions),
-                shots: totalShots,
-                goals: totalGoals,
-                reactionTime: averageReactionTime/Float(numberOfSessions),
-                fastestShot: fastestShot,
-                quickestReactionTime: quickestReactionTime
-            )
-            self.tableView.reloadData()
-        } catch let error as NSError {
-          print("Could not fetch. \(error), \(error.userInfo)")
-        }
+        let (sessionViewModels, historicalViewModel) = CoreDataManager.fetchSessionStats()
+        self.viewModel.recentSessions = sessionViewModels
+        self.viewModel.historicalStats = historicalViewModel
+        self.tableView.reloadData()
     }
 }
 
