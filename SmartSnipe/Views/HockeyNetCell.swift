@@ -8,12 +8,12 @@
 
 import UIKit
 
-enum HockeyNetHole: String {
+enum HockeyNetHole: Int {
     case topLeft
     case topRight
-    case bottomLeft
     case bottomRight
     case fiveHole
+    case bottomLeft
 }
 
 class HockeyNetCell: UITableViewCell {

@@ -13,6 +13,10 @@ protocol SessionDelegate: class {
     func didUpdateSessionModel(sessionViewModel: SessionViewModel)
 }
 
+protocol BluetoothConnectionDelegate: class {
+    func didUpdateConnection(connected: Bool)
+}
+
 class SSBluetoothManager: NSObject {
     
     // Shared Manager singleton
@@ -24,6 +28,7 @@ class SSBluetoothManager: NSObject {
     private var receiveCharacteristic: CBCharacteristic?
     
     weak var sessionDelegate: SessionDelegate?
+    weak var connectionDelegate: BluetoothConnectionDelegate?
     
     override init() {
         centralManager = CBCentralManager(delegate: nil, queue: DispatchQueue.main, options: nil)
@@ -57,7 +62,7 @@ class SSBluetoothManager: NSObject {
     
     func updateNextHole(hole: HockeyNetHole) {
         let jsonDictionary: [String: Any] = [
-            "hole_to_open": hole.rawValue
+            "slot_to_open_next": hole.rawValue
         ]
         guard let smartSnipePeripheral = self.smartSnipePeripheral,
             let receiveCharacteristic = self.receiveCharacteristic,
@@ -73,6 +78,14 @@ class SSBluetoothManager: NSObject {
             let settingsJSON = try? JSONEncoder().encode(settingsViewModel) else { return }
         smartSnipePeripheral.writeValue(settingsJSON,
                                         for: receiveCharacteristic, type: CBCharacteristicWriteType.withResponse)
+    }
+    
+    func reconnectToNet() {
+        self.centralManager.scanForPeripherals(withServices: nil, options: nil)
+    }
+    
+    func isConnectedToNet() -> Bool {
+        return self.transmitCharacteristic != nil && self.receiveCharacteristic != nil
     }
 }
 
@@ -121,6 +134,7 @@ extension SSBluetoothManager: CBPeripheralDelegate {
                 peripheral.setNotifyValue(true, for: characteristic)
             }
         }
+        self.connectionDelegate?.didUpdateConnection(connected: true)
     }
     
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {

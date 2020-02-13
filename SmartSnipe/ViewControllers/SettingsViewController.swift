@@ -49,7 +49,7 @@ class SettingsViewController: UITableViewController {
     private var settingsViewModel = SettingsViewModel(timeBetweenOpenings: 4,
                                                       timeSlotIsOpen: 1.5,
                                                       numberOfSlotsThatOpen: 1,
-                                                      currentMode: ShootingMode.allCorners)
+                                                      currentMode: ShootingMode.allSlots)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -116,7 +116,7 @@ extension SettingsViewController {
         case 3:
             self.configure(cell: cell,
                            text: "Current Mode",
-                           detailText: self.settingsViewModel.currentMode.rawValue,
+                           detailText: self.settingsViewModel.currentMode.formattedText,
                            imagaName: "goal")
         default:
             fatalError("Unexpected index")
@@ -163,8 +163,8 @@ extension SettingsViewController {
             let viewModel = EditSettingsViewModel(
                 navigationTitleText: "Current Mode",
                 descriptionText: "Edit the current shooting mode.",
-                pickerValues: [ShootingMode.allCorners.rawValue, ShootingMode.topCorners.rawValue],
-                selectedPickerValue: self.settingsViewModel.currentMode.rawValue)
+                pickerValues: [ShootingMode.allSlots.formattedText, ShootingMode.topCorners.formattedText],
+                selectedPickerValue: self.settingsViewModel.currentMode.formattedText)
             let editModeViewController = CurrentModeViewController(viewModel: viewModel)
             editModeViewController.delegate = self
             self.navigationController?.pushViewController(editModeViewController, animated: true)
@@ -199,7 +199,7 @@ extension SettingsViewController: NumberOfSlotsThatOpenDelegate {
 
 extension SettingsViewController: CurrentModeDelegate {
     func currentModeUpdated(_ currentMode: String) {
-        self.settingsViewModel.currentMode = ShootingMode(rawValue: currentMode) ?? .allCorners
+        self.settingsViewModel.currentMode = ShootingMode(formattedText: currentMode) ?? .allSlots
         self.tableView.reloadData()
         SSBluetoothManager.sharedManager.updateSettings(settingsViewModel: self.settingsViewModel)
     }

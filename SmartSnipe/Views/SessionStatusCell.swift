@@ -13,14 +13,14 @@ class SessionsStatusCell: UITableViewCell {
     
     let descriptionLabel = UILabel()
     let netStatusLabel = UILabel()
-    let sessionStartTimeLabel = UILabel()
+    let reconnectButton = UIButton()
     
     let stackView = UIStackView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.setupCell()
-        self.descriptionLabel.text = "Status"
+        self.descriptionLabel.text = "Bluetooth Status"
     }
     
     private func setupCell() {
@@ -34,13 +34,21 @@ class SessionsStatusCell: UITableViewCell {
         
         self.descriptionLabel.font = UIFont.preferredFont(forTextStyle: .headline)
         self.netStatusLabel.font = UIFont.preferredFont(forTextStyle: .body)
-        self.sessionStartTimeLabel.font = UIFont.preferredFont(forTextStyle: .body)
         
-        [self.descriptionLabel, self.netStatusLabel, self.sessionStartTimeLabel].forEach {
+        [self.descriptionLabel, self.netStatusLabel].forEach {
             $0.textColor = SSColors.platinum
             self.stackView.addArrangedSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
+        
+        self.reconnectButton.addTarget(self,
+                                       action: #selector(reconnectButtonTapped),
+                                       for: .touchUpInside)
+        self.reconnectButton.contentHorizontalAlignment = .left
+        self.reconnectButton.setTitle("Reconnect", for: .normal)
+        self.reconnectButton.setTitleColor(SSColors.grainYellow, for: .normal)
+        self.reconnectButton.translatesAutoresizingMaskIntoConstraints = false
+        self.stackView.addArrangedSubview(self.reconnectButton)
         
         NSLayoutConstraint.activate([
             self.stackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: SSMargins.large),
@@ -55,23 +63,22 @@ class SessionsStatusCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func updateCell(isNetConnected: Bool, start: Date?) {
-        let date = Date()
-        let calendar = Calendar.current
-
-        let hour = calendar.component(.hour, from: date)
-        let minute = calendar.component(.minute, from: date)
+    func updateCell(isNetConnected: Bool) {
         
-        let formattedDate = String(hour) + ":" + String(minute)
-        
-        let statusString = "Net Status: Connected"
+        let statusString = isNetConnected ? "Net Status: Connected" : "Net Status: Disconnected"
         let statusAttributedString = NSMutableAttributedString(string: statusString, attributes: [NSAttributedString.Key.foregroundColor : SSColors.platinum])
         statusAttributedString.addAttributes([NSAttributedString.Key.foregroundColor : SSColors.grainYellow], range: NSMakeRange(0, "Net Status: ".count))
         self.netStatusLabel.attributedText = statusAttributedString
         
-        let startTimeString = "Start Time: " + formattedDate
-        let startTimeAttributedString = NSMutableAttributedString(string: startTimeString, attributes: [NSAttributedString.Key.foregroundColor : SSColors.platinum])
-        startTimeAttributedString.addAttributes([NSAttributedString.Key.foregroundColor : SSColors.grainYellow], range: NSMakeRange(0, "Start Time: ".count))
-        self.sessionStartTimeLabel.attributedText = startTimeAttributedString
+        if isNetConnected {
+            self.reconnectButton.isHidden = true
+        } else {
+            self.reconnectButton.isHidden = false
+        }
+    }
+    
+    @objc
+    func reconnectButtonTapped() {
+        SSBluetoothManager.sharedManager.reconnectToNet()
     }
 }

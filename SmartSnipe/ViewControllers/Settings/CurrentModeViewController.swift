@@ -10,8 +10,28 @@ import Foundation
 import UIKit
 
 enum ShootingMode: String, Codable {
-    case allCorners = "All Corners"
-    case topCorners = "Top Corners"
+    case allSlots = "all_slots"
+    case topCorners = "top_corners"
+    
+    init(formattedText: String) {
+        switch formattedText {
+        case "All Slots":
+            self = .allSlots
+        case "Top Corners":
+            self = .topCorners
+        default:
+            fatalError()
+        }
+    }
+    
+    var formattedText: String {
+        switch self {
+        case .allSlots:
+            return "All Slots"
+        case .topCorners:
+            return "Top Corners"
+        }
+    }
 }
 
 class CurrentModeViewController: EditSettingsViewController {

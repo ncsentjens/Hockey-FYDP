@@ -15,7 +15,6 @@ protocol HockeyNetDelegate: class {
 struct SessionViewControllerViewModel {
     var isNetConnected: Bool
     var isSessionInProgress: Bool
-    var sessionStart: Date?
     var sessionViewModel: SessionViewModel
 }
 
@@ -32,9 +31,8 @@ class SessionViewController: UIViewController {
                                                 fastestShot: 84.2,
                                                 quickestReactionTime: 0.40,
                                                 sessionDate: Date())
-        self.viewModel = SessionViewControllerViewModel(isNetConnected: true,
+        self.viewModel = SessionViewControllerViewModel(isNetConnected: false,
                                                         isSessionInProgress: false,
-                                                        sessionStart: nil,
                                                         sessionViewModel: sessionViewModel
         )
         super.init(nibName: nil, bundle: nil)
@@ -45,6 +43,8 @@ class SessionViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        self.viewModel.isNetConnected = SSBluetoothManager.sharedManager.isConnectedToNet()
+        
         self.view.backgroundColor = SSColors.raisinBlack
         
         self.navigationItem.title = "Session"
@@ -109,7 +109,6 @@ class SessionViewController: UIViewController {
             self.viewModel.isSessionInProgress = false
             SSBluetoothManager.sharedManager.endSession()
         } else {
-            self.viewModel.sessionStart = Date()
             
             self.viewModel.isSessionInProgress = true
             SSBluetoothManager.sharedManager.startSession()
@@ -148,7 +147,7 @@ extension SessionViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "session_status_cell") as? SessionsStatusCell else {
                 fatalError()
             }
-            cell.updateCell(isNetConnected: self.viewModel.isNetConnected, start: self.viewModel.sessionStart)
+            cell.updateCell(isNetConnected: self.viewModel.isNetConnected)
             return cell
         case 1:
             guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "hockey_net_cell") as? HockeyNetCell else {
@@ -182,6 +181,13 @@ extension SessionViewController: HockeyNetDelegate {
 extension SessionViewController: SessionDelegate {
     func didUpdateSessionModel(sessionViewModel: SessionViewModel) {
         self.viewModel.sessionViewModel = sessionViewModel
+        self.tableView.reloadData()
+    }
+}
+
+extension SessionViewController: BluetoothConnectionDelegate {
+    func didUpdateConnection(connected: Bool) {
+        self.viewModel.isNetConnected = connected
         self.tableView.reloadData()
     }
 }
