@@ -37,16 +37,17 @@ class SSBluetoothManager: NSObject {
         self.centralManager.scanForPeripherals(withServices: nil, options: nil)
     }
     
-    func startSession() {
+    func startSession() -> Bool {
         let jsonDictionary: [String: Any] = [
             "session_in_progress": true
         ]
         guard let smartSnipePeripheral = self.smartSnipePeripheral,
             let receiveCharacteristic = self.receiveCharacteristic,
             let jsonData = try? JSONSerialization.data(withJSONObject: jsonDictionary,
-                                                       options: JSONSerialization.WritingOptions()) else { return }
+                                                       options: JSONSerialization.WritingOptions()) else { return false}
 
         smartSnipePeripheral.writeValue(jsonData, for: receiveCharacteristic, type: .withResponse)
+        return true
     }
     
     func endSession() {

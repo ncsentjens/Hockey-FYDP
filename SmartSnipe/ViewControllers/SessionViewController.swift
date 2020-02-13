@@ -109,9 +109,16 @@ class SessionViewController: UIViewController {
             self.viewModel.isSessionInProgress = false
             SSBluetoothManager.sharedManager.endSession()
         } else {
-            
-            self.viewModel.isSessionInProgress = true
-            SSBluetoothManager.sharedManager.startSession()
+            let successful = SSBluetoothManager.sharedManager.startSession()
+            if successful {
+                self.viewModel.isSessionInProgress = true
+            } else {
+                let alert = UIAlertController(title: "Unable to Start Session", message: "A session could not be started. Try reconnecting to the net.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                NSLog("The \"OK\" alert occured.")
+                }))
+                self.present(alert, animated: true, completion: nil)
+            }
         }
         self.updateSessionButton()
         self.tableView.reloadData()
