@@ -24,13 +24,7 @@ class SessionViewController: UIViewController {
     private var viewModel: SessionViewControllerViewModel
     
     init() {
-        let sessionViewModel = SessionViewModel(shots: 10,
-                                                goals: 4,
-                                                averageShotSpeed: 67.9,
-                                                averageReactionTime: 0.43,
-                                                fastestShot: 84.2,
-                                                quickestReactionTime: 0.40,
-                                                sessionDate: Date())
+        let sessionViewModel = CoreDataManager.fetchMostRecentSession()
         self.viewModel = SessionViewControllerViewModel(isNetConnected: false,
                                                         isSessionInProgress: false,
                                                         sessionViewModel: sessionViewModel
@@ -40,6 +34,11 @@ class SessionViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -110,8 +109,15 @@ class SessionViewController: UIViewController {
             SSBluetoothManager.sharedManager.endSession()
         } else {
             let successful = SSBluetoothManager.sharedManager.startSession()
-            if successful {
+            if true {
                 self.viewModel.isSessionInProgress = true
+                self.viewModel.sessionViewModel = SessionViewModel(shots: 0,
+                                                                   goals: 0,
+                                                                   averageShotSpeed: 0,
+                                                                   averageReactionTime: 0,
+                                                                   fastestShot: 0,
+                                                                   quickestReactionTime: 0,
+                                                                   sessionDate: Date())
             } else {
                 let alert = UIAlertController(title: "Unable to Start Session", message: "A session could not be started. Try reconnecting to the net.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
@@ -166,7 +172,7 @@ extension SessionViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "current_session_cell") as? CurrentSessionCell else {
                 fatalError()
             }
-            cell.applyViewModel(viewModel: self.viewModel.sessionViewModel)
+            cell.applyViewModel(viewModel: self.viewModel.sessionViewModel, sessionInProgress: self.viewModel.isSessionInProgress)
             return cell
         default:
             fatalError()

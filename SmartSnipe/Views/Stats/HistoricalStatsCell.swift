@@ -18,7 +18,7 @@ struct HistoricalStatsViewModel {
     let quickestReactionTime: Float
     
     static func shootingPercentage(goals: Int, shots: Int) -> Float {
-        return SSHelper.roundNum(number: Float(goals) / Float(shots) * 100, places: 1)
+        return SSHelper.roundNum(number: Float(goals) / (shots > 0 ? Float(shots) : 1.0) * 100, places: 1)
 //        return round((Float(goals) / Float(shots) * 10 * 100)) / 10
     }
 }

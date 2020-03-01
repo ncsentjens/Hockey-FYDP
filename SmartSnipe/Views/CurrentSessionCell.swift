@@ -53,7 +53,7 @@ class CurrentSessionCell: UITableViewCell {
         
         self.descriptionLabel.textColor = SSColors.platinum
         self.descriptionLabel.font = UIFont.preferredFont(forTextStyle: .headline)
-        self.descriptionLabel.text = "Current Session"
+//        self.descriptionLabel.text = "Current Session"
         
         self.buildCell()
     }
@@ -97,7 +97,9 @@ class CurrentSessionCell: UITableViewCell {
         ])
     }
     
-    func applyViewModel(viewModel: SessionViewModel) {
+    func applyViewModel(viewModel: SessionViewModel, sessionInProgress: Bool) {
+        self.descriptionLabel.text = sessionInProgress ? "Current Session" : "Last Session"
+        
         // Goals Label
         self.goalsLabel.set(leftText: "Goals", rightText: String(viewModel.goals))
         
